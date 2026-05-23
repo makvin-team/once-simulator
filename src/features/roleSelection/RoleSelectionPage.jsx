@@ -286,8 +286,8 @@ function Footnote() {
         flexWrap: 'wrap',
         gap: 8,
         alignItems: 'center',
-      }}
-    >
+      }}>
+        
       {['4 pillars · 20 modules'].map(
         (label) => (
           <span
