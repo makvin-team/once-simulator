@@ -81,6 +81,7 @@ export const amlSuspiciousTransactionScenario = {
 
     inspect: {
       kind: 'inspect',
+      i18nRoot: 'amlScenario',
       txTagI18n: 'amlScenario.txPanel.tag',
       clientNameI18n: 'amlScenario.txPanel.client',
       clientMetaI18n: 'amlScenario.txPanel.clientMeta',

@@ -62,6 +62,7 @@ export const cyberPhishingTriageScenario = {
 
     inspect: {
       kind: 'inspect',
+      i18nRoot: 'cyberScenario',
       txTagI18n: 'cyberScenario.txPanel.tag',
       clientNameI18n: 'cyberScenario.txPanel.client',
       clientMetaI18n: 'cyberScenario.txPanel.clientMeta',

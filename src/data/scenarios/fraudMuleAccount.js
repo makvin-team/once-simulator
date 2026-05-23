@@ -59,6 +59,7 @@ export const fraudMuleAccountScenario = {
 
     inspect: {
       kind: 'inspect',
+      i18nRoot: 'fraudScenario',
       txTagI18n: 'fraudScenario.txPanel.tag',
       clientNameI18n: 'fraudScenario.txPanel.client',
       clientMetaI18n: 'fraudScenario.txPanel.clientMeta',

@@ -11,11 +11,25 @@
 import { uz } from './translations/uz.js';
 import { uz_cyrl } from './translations/uz_cyrl.js';
 import { ru } from './translations/ru.js';
+import { uzScenarios } from './translations/scenarios/uz.js';
+import { uzCyrlScenarios } from './translations/scenarios/uz_cyrl.js';
+import { ruScenarios } from './translations/scenarios/ru.js';
 import { useAppStore } from '../state/useAppStore.js';
 
 export const LOCALES = ['uz', 'uz_cyrl', 'ru'];
 
-const TRANSLATIONS = { uz, uz_cyrl, ru };
+/**
+ * Merge the per-locale base translations with the m2-m5 scenario trees
+ * loaded from `./translations/scenarios/`. The factory-generated
+ * scenarios resolve all their copy under `scenarios.{id}.*`, so this
+ * mount point is the single integration seam between the base
+ * translation set and the scenario authoring files.
+ */
+const TRANSLATIONS = {
+  uz: { ...uz, scenarios: uzScenarios },
+  uz_cyrl: { ...uz_cyrl, scenarios: uzCyrlScenarios },
+  ru: { ...ru, scenarios: ruScenarios },
+};
 
 export const DEFAULT_LOCALE = 'uz_cyrl';
 

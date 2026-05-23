@@ -59,6 +59,7 @@ export const cxAddressChangeScenario = {
 
     inspect: {
       kind: 'inspect',
+      i18nRoot: 'cxScenario',
       txTagI18n: 'cxScenario.txPanel.tag',
       clientNameI18n: 'cxScenario.txPanel.client',
       clientMetaI18n: 'cxScenario.txPanel.clientMeta',
