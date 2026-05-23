@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * Cyber pillar · Module 4 — Zero Trust Access.
@@ -8,18 +8,21 @@ import { makeScenario } from './_makeScenario.js';
  * permanent admin group membership (0).
  */
 
-export const cyberZeroTrustScenario = makeScenario({
-  id: 'cyberZeroTrust',
-  pillarId: 'cyber',
-  severity: 'high',
-  defaultCards: ['#A6D8FF', '#FFD86B', '#FFB68A'],
-  indicators: [
-    { id: 'requester', tone: 'sky', severity: 'medium' },
-    { id: 'scope', tone: 'rose', severity: 'critical' },
-    { id: 'duration', tone: 'peach', severity: 'high' },
-    { id: 'audit', tone: 'butter', severity: 'medium' },
-  ],
-  correctId: 'jitAccess',
-  partialId: 'vpnMonitor',
-  failId: 'permanentGroup',
-});
+export const cyberZeroTrustScenario = withContext(
+  makeScenario({
+    id: 'cyberZeroTrust',
+    pillarId: 'cyber',
+    severity: 'high',
+    defaultCards: ['#A6D8FF', '#FFD86B', '#FFB68A'],
+    indicators: [
+      { id: 'requester', tone: 'sky', severity: 'medium' },
+      { id: 'scope', tone: 'rose', severity: 'critical' },
+      { id: 'duration', tone: 'peach', severity: 'high' },
+      { id: 'audit', tone: 'butter', severity: 'medium' },
+    ],
+    correctId: 'jitAccess',
+    partialId: 'vpnMonitor',
+    failId: 'permanentGroup',
+  }),
+  'scenarios.cyberZeroTrust',
+);

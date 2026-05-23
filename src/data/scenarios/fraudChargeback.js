@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * Fraud pillar · Module 4 — Chargeback Triage.
@@ -9,18 +9,21 @@ import { makeScenario } from './_makeScenario.js';
  * goodwill (+6), accept the dispute (0).
  */
 
-export const fraudChargebackScenario = makeScenario({
-  id: 'fraudChargeback',
-  pillarId: 'fraud',
-  severity: 'medium',
-  defaultCards: ['#FFD86B', '#A8E5C8', '#A6D8FF'],
-  indicators: [
-    { id: 'delivery', tone: 'mint', severity: 'medium' },
-    { id: 'history', tone: 'butter', severity: 'medium' },
-    { id: 'pattern', tone: 'peach', severity: 'high' },
-    { id: 'reasonCode', tone: 'sky', severity: 'medium' },
-  ],
-  correctId: 'defendEvidence',
-  partialId: 'partialRefund',
-  failId: 'acceptDispute',
-});
+export const fraudChargebackScenario = withContext(
+  makeScenario({
+    id: 'fraudChargeback',
+    pillarId: 'fraud',
+    severity: 'medium',
+    defaultCards: ['#FFD86B', '#A8E5C8', '#A6D8FF'],
+    indicators: [
+      { id: 'delivery', tone: 'mint', severity: 'medium' },
+      { id: 'history', tone: 'butter', severity: 'medium' },
+      { id: 'pattern', tone: 'peach', severity: 'high' },
+      { id: 'reasonCode', tone: 'sky', severity: 'medium' },
+    ],
+    correctId: 'defendEvidence',
+    partialId: 'partialRefund',
+    failId: 'acceptDispute',
+  }),
+  'scenarios.fraudChargeback',
+);

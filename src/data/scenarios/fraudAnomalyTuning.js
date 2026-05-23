@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * Fraud pillar · Module 5 — AI Anomaly Tuning.
@@ -9,18 +9,21 @@ import { makeScenario } from './_makeScenario.js';
  * or disable the noisy rule outright (0).
  */
 
-export const fraudAnomalyTuningScenario = makeScenario({
-  id: 'fraudAnomalyTuning',
-  pillarId: 'fraud',
-  severity: 'medium',
-  defaultCards: ['#A8E5C8', '#FFD86B', '#A6D8FF'],
-  indicators: [
-    { id: 'fpRate', value: '4.2x', tone: 'peach', severity: 'high' },
-    { id: 'driftSource', tone: 'butter', severity: 'medium' },
-    { id: 'backtest', tone: 'mint', severity: 'low' },
-    { id: 'coverage', tone: 'sky', severity: 'medium' },
-  ],
-  correctId: 'tuneBacktest',
-  partialId: 'partialBump',
-  failId: 'disableRule',
-});
+export const fraudAnomalyTuningScenario = withContext(
+  makeScenario({
+    id: 'fraudAnomalyTuning',
+    pillarId: 'fraud',
+    severity: 'medium',
+    defaultCards: ['#A8E5C8', '#FFD86B', '#A6D8FF'],
+    indicators: [
+      { id: 'fpRate', value: '4.2x', tone: 'peach', severity: 'high' },
+      { id: 'driftSource', tone: 'butter', severity: 'medium' },
+      { id: 'backtest', tone: 'mint', severity: 'low' },
+      { id: 'coverage', tone: 'sky', severity: 'medium' },
+    ],
+    correctId: 'tuneBacktest',
+    partialId: 'partialBump',
+    failId: 'disableRule',
+  }),
+  'scenarios.fraudAnomalyTuning',
+);

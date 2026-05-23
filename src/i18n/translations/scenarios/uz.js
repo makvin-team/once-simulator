@@ -10,7 +10,22 @@
 const amlBeneficialOwner = {
   title: 'KYC chuqurlashtirilgan — UBO',
   subtitle: 'AML §5.1 · Beneficial owner aniqlash',
-  proctorIntro: '"Konsalting MChJ" hisob ochmoqchi. UBO maʼlumotini bermayapti.',
+  proctorIntro: 'KYC oynasi oldidasiz. Yuridik shaxs hisob ochish soʻrovi keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · KYC oynasi · 10:10 Seshanba',
+    context:
+      'Seshanba kuni 10:10. Siz KYC navbatchi xodimisiz. "Konsalting Plus MChJ" (INN 30412840100501) korporativ hisob ochish soʻrovi bilan keldi. Vakil A. Nazarov hujjatlarni keltirgan, lekin UBO (ultimate beneficial owner) maʼlumotini berishdan bosh tortyapti — "bu maxfiy maʼlumot, biz boshqaruvchini koʻrsatamiz". Ro‘yxatdan o‘tish hujjatlariga ko‘ra, kompaniya BVI yurisdiksiyasida tashkil etilgan, uchta vositachi qatlam orqali nazorat qilinadi. Boshlangʻich kapital — 5 mln USD. AML §5.1 talab qiladi: korporativ hisob ochishdan oldin ultimate beneficial owner aniqlanishi shart, har bir qatlam ochilishi kerak.',
+    whatYouSee: [
+      'Tashkilot: Konsalting Plus MChJ · INN 30412840100501 · BVI yurisdiksiyasida ro‘yxatdan o‘tgan.',
+      'Egalik tuzilmasi: 3 vositachi qatlam · UBO yashirin · POA bilan A. Nazarov vakil.',
+      'Boshlangʻich kapital: 5 mln USD · maʼlum manba ko‘rsatilmagan · onboarding 2 hafta avvalda.',
+    ],
+    whatYouHear: [
+      '«Bu maxfiy maʼlumot, siz faqat boshqaruvchini bilishingiz kerak.»',
+      '«Hujjatlarni keyinroq tomonidan yuboramiz, hozir hisobni ochaylik.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'KYC eskalatsiyasi',
@@ -94,7 +109,22 @@ const amlBeneficialOwner = {
 const amlSanctions = {
   title: 'Sanksiya tekshiruvi — OFAC',
   subtitle: 'AML §6.2 · Sanksiya roʻyxati mosligi',
-  proctorIntro: 'Tranzaksiya skanerlash 88% moslik aniqladi. OFAC roʻyxati.',
+  proctorIntro: 'Toʻlovlar konsoli oldidasiz. Sanksiya skaneri ogohlantirish berdi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Toʻlov skaneri · 13:10 Payshanba',
+    context:
+      'Payshanba kuni 13:10. Siz AML to‘lovlar konsolining navbatchi tahlilchisisiz. Akmal Karimov (INN 30312840190303) 240 ming AQSh dollari wire-o‘tkazma so‘ramoqda — beneficiar Almatida. Sanksiya skaneri OFAC SDN ro‘yxatiga nisbatan 88% fuzzy moslik aniqladi: beneficiarning ismi va tug‘ilgan sanasi qisman taqiqlangan shaxs bilan mos keladi. Korridor UZ→KZ high-risk ro‘yxatda. AML §6.2 talab qiladi: 80%+ moslikda tranzaksiya darhol bloklanadi va 24 soat ichida OFAC hisoboti yuboriladi. To‘g‘ridan-to‘g‘ri mijoz bilan suhbat yo‘q — bu tizim aniqlagan vaziyat.',
+    whatYouSee: [
+      'Wire so‘rovi: 240 ming AQSh dollari · beneficiar Almatida · UZ→KZ korridori (high-risk).',
+      'Sanksiya skaneri: OFAC SDN ro‘yxatiga 88% fuzzy moslik · ism + tug‘ilgan sana mos keladi.',
+      'Mijoz: Akmal Karimov · INN 30312840190303 · standart KYC bajarilgan · 3 yil mijoz.',
+    ],
+    whatYouHear: [
+      'Skaner ogohlantirishi: «88% moslik · OFAC SDN · operatorni qaroriga qoldirilgan».',
+      'Hech bir mijoz tushuntirishi yo‘q — to‘lov ATM kanali orqali, jonli suhbat yo‘q.',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Sanksiya mosligi',
@@ -178,7 +208,22 @@ const amlSanctions = {
 const amlPep = {
   title: 'PEP risk — siyosiy shaxslar',
   subtitle: 'AML §7.3 · Enhanced Due Diligence',
-  proctorIntro: 'Hudud deputati 420 mln biznes daromadini joylashtirmoqchi.',
+  proctorIntro: 'Kassada navbatchisiz. PEP belgili mijozdan katta kirim keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Filial kassasi · 15:00 Chorshanba',
+    context:
+      'Chorshanba kuni 15:00. Siz Toshkent-1 filialining navbatchi xodimisiz. Bahodir Salimov (INN 30112840100210) — hudud deputati, 8 yillik mijoz — 420 mln so‘m biznes daromadini joylashtirmoqchi. CRM profilida PEP belgisi yoqilgan. Mijoz manba sifatida «mening qurilish kompaniyam» ni ko‘rsatadi va 2 oy avval tuzilgan ish kontraktini taqdim etadi. AML §7.3 talab qiladi: Politically Exposed Person uchun standart KYC yetarli emas — Enhanced Due Diligence va senior approval majburiy, 100 mln+ summalarda manba hujjati to‘liq tekshiriladi.',
+    whatYouSee: [
+      'Profil: Bahodir Salimov · INN 30112840100210 · hudud deputati · PEP belgisi yoqilgan · 8 yil mijoz.',
+      'Kirim: 420 mln so‘m naqd · manba: «qurilish kompaniyasi» · kontrakt 2 oy avvalda tuzilgan.',
+      'Talab: AML §7.3 EDD majburiy · senior tasdiq · manba hujjati tekshirilishi shart.',
+    ],
+    whatYouHear: [
+      '«Bu mening qurilish kompaniyamning daromadi, hujjat olib keldim.»',
+      '«Tezroq qabul qiling, men deputatman, vaqtim yo‘q.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'PEP belgisi',
@@ -262,7 +307,22 @@ const amlPep = {
 const amlSarWriting = {
   title: 'SAR yozish — amaliyot',
   subtitle: 'AML §8.1 · 5W narrativ formati',
-  proctorIntro: 'Shubhali pattern aniqlandi. SAR yozish vaqti — qaysi formatni tanlaysiz?',
+  proctorIntro: 'SAR drafti tizimida vaziyatni oʻrganing. Tahlil tugagan — endi narrativ formatini tanlash kerak.',
+  caseContext: {
+    tag: 'Vaziyat · SAR drafti · 11:30 Juma',
+    context:
+      'Juma kuni 11:30. Siz AML jamoasining tahlilchisisiz. 3 hafta davomida olib borilgan pattern tahlili tugadi: 3 ta yangi mijoz (har biri 30-45 kun avval ochilgan) hisobiga jami 4 ta tranzaksiya orqali 50 mln so‘mdan ortiq naqd kirim kelgan, har biri darhol tashqi kartaga o‘tkazilgan. Dalillar to‘liq, Compliance ga yuborish uchun SAR draft kerak. AML §8.1 talab qiladi: faktik 5W formati (Kim, Nima, Qachon, Qaerda, Qancha), neytral va professional ohang, hissiyot yoki ayblovsiz. Compliance 24 soat ichida SAR ni ko‘radi va yuborish to‘g‘risida qaror qabul qiladi.',
+    whatYouSee: [
+      'Pattern: 3 yangi hisob (30-45 kun) · 4 ta tranzaksiya · jami 156 mln so‘m naqd kirim.',
+      'Yo‘nalish: barcha mablag‘ darhol tashqi UnionPay kartaga o‘tkazilgan (3 ta turli karta).',
+      'Talab: 5W faktik narrativ · AML §8.1 · Compliance 24 soat ichida ko‘radi.',
+    ],
+    whatYouHear: [
+      'Compliance manager dan eslatma: «hissiyotsiz, faqat fakt — har gap audit isboti bilan».',
+      'AI yordamchi: «pattern aniq, dalillar to‘liq — drafting boshlash mumkin».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'SAR drafti',
@@ -346,7 +406,22 @@ const amlSarWriting = {
 const cyberSocTriage = {
   title: 'SOC alert triage — lateral movement',
   subtitle: 'IB-402 · IDS yuqori prioritet',
-  proctorIntro: 'Finance bo‘limidan lateral movement. IDS yuqori prioritet.',
+  proctorIntro: 'SOC konsoli oldidasiz. IDS critical ogohlantirish berdi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · SOC konsoli · 09:34 Seshanba',
+    context:
+      'Seshanba kuni 09:34. Siz SOC navbatchi tahlilchisisiz. IDS critical ogohlantirish berdi: Finance boʻlimining ish stansiyasi FIN-WS-12 (Win11, domen ulanishida) admin$ shareʼga noqonuniy urinish qildi va keyin yondosh hostda SMB skan boshladi. Foydalanuvchi 09:14 da normal login qilgan edi, 18 daqiqadan keyin pattern boshlandi. Bu klassik lateral movement belgisi — ransomware operatorlari odatda shu yoʻl bilan tarmoq bo‘ylab tarqaladi. IR jamoa stand-by da, izolatsiya tugmasi sizning konsolingizda.',
+    whatYouSee: [
+      'Host: FIN-WS-12 · Finance boʻlimi · Win11 · domen ulanishida · oxirgi login 09:14.',
+      'Pattern: admin$ share urinish + SMB skan yondosh hostda · IDS critical alert · 09:32-09:34.',
+      'Tarmoq holati: 1 host shubhali · backup tarmoqlar hozircha toza · IR jamoa stand-by.',
+    ],
+    whatYouHear: [
+      'IDS xabari: «critical alert · admin$ share access attempt · 1 host · lateral movement pattern».',
+      'IR yetakchisi whisper: «kuting yoki izolatsiya qilamiz — qarorni siz qabul qilasiz».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'IDS critical',
@@ -430,7 +505,22 @@ const cyberSocTriage = {
 const cyberIncidentResponse = {
   title: 'Incident response — ransomware',
   subtitle: 'NIST 800-61 · Containment + Eradication',
-  proctorIntro: 'Ransomware Finance bo‘limida fayllarni shifrlayapti. Vaqt yoʻq.',
+  proctorIntro: 'IR command center da vaziyatni oʻrganing. Aktiv ransomware hujumi — har soniya muhim.',
+  caseContext: {
+    tag: 'Vaziyat · IR command center · 14:46 Chorshanba',
+    context:
+      'Chorshanba kuni 14:46. Siz Incident Response jamoasining yetakchisisiz. 14 daqiqa avval (14:32 da) Finance boʻlimida birinchi host Lockbit ransomware varianti tomonidan shifrlandi. Hozirga qadar 8 ta host yuqumlangan, yangi xabar shu daqiqada paydo boʻldi: ransom — 50 BTC (taxminan 1.5 mln USD). Backup tarmoq fizikaviy ravishda ajratilgan va hali toza, ammo agar inkubatsiya davom etsa, backup ham xavf ostida qoladi. NIST 800-61 protokoli aniq belgilaydi: Containment birinchi, keyin Eradication, keyin Recovery — forensik dalillarni saqlab qolish kerak.',
+    whatYouSee: [
+      'Tarqalish: 8 host shifrlangan · barchasi Finance boʻlimida · 14 daqiqada (14:32 → 14:46).',
+      'Ransomware: Lockbit varianti · ransom xabari 50 BTC (≈ 1.5 mln USD) · BTC manzil berilgan.',
+      'Backup: fizikaviy ajratilgan tarmoqda · hali toza · agar kechiktirilsa yuqishi mumkin.',
+    ],
+    whatYouHear: [
+      'CTO whisper: «forensikani saqlang — sug‘urta va keyingi tergov uchun zarur».',
+      'Junior IR: «backupdan tezda tiklaymizmi, axir vaqt yoʻq?»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'INCIDENT critical',
@@ -514,7 +604,22 @@ const cyberIncidentResponse = {
 const cyberZeroTrust = {
   title: 'Zero Trust — vendor kirishi',
   subtitle: 'IB-505 · Just-In-Time Access',
-  proctorIntro: 'Vendor production ga doimiy admin kirish soʻraydi. Zero Trust strategiyasi.',
+  proctorIntro: 'IAM access boshqaruvi oldidasiz. Tashqi vendor admin huquqi soʻraydi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · IAM access boshqaruvi · 10:12 Payshanba',
+    context:
+      'Payshanba kuni 10:12. Siz IAM (Identity and Access Management) navbatchi muhandisisiz. Tashqi vendor — "TechVendor LLC" (2 yillik shartnoma, 6 muhandis) — production muhitiga doimiy admin kirish soʻradi. Vakil "doimiy texnik xizmat" deb tushuntiryapti: ular har kuni texnik koʻrik oʻtkazadi va shoshilinch holatlarda ulanmoq kerak. Bizning Zero Trust strategiyamiz IB-505 da yozilgan — har soʻrovga shubha bilan qarash, minimum privilege printsipi. JIT (Just-In-Time) access tizimi tayyor: 4 soatlik oynalar, har sessiyaga tasdiq, jurnal, sessiya tugashi bilan avtomatik oʻchirish.',
+    whatYouSee: [
+      'Soʻrovchi: TechVendor LLC · tashqi xizmat ko‘rsatuvchi · 2 yil shartnoma · 6 muhandis.',
+      'Soʻrov: production admin · doimiy ulanish · "doimiy texnik xizmat" deb tushuntirilgan.',
+      'Mavjud: JIT access tizimi · 4 soat oynalar · sessiyaga tasdiq + jurnal · auto-revoke.',
+    ],
+    whatYouHear: [
+      'Vendor vakili: «doimiy ulanish bizga shoshilinch holatlarda javob berishni osonlashtiradi».',
+      'CISO eslatma: «vendor xakerlangan boʻlsa — biz ham buzilamiz, bu supply chain riski».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Access soʻrovi',
@@ -598,7 +703,22 @@ const cyberZeroTrust = {
 const cyberDeepfake = {
   title: 'Deepfake ovoz verifikatsiyasi',
   subtitle: 'IB-606 · Callback protokoli',
-  proctorIntro: '"CEO" qoʻngʻiroq qildi · tezkor $200K wire so‘rayapti. Ovoz g‘alati.',
+  proctorIntro: 'Treasury operator stolida vaziyatni oʻrganing. "CEO" tezkor wire so‘ramoqda — ovoz shubhali.',
+  caseContext: {
+    tag: 'Vaziyat · Treasury operator · 16:04 Juma',
+    context:
+      'Juma kuni 16:04. Siz Treasury operatorisiz, oxirgi ish kuni. Notanish raqamdan qoʻngʻiroq keldi: ovoz CEO Akmal Tursunov niki bo‘ladi, lekin bir oz uncanny — soʻzlar oʻrtasidagi pauzalar tabiiy emas, intonatsiya gʻalati. U 200 ming AQSh dollari hajmidagi tezkor wire-o‘tkazmani so‘ramoqda — "savdo ulgurmasin, men hozir aeroportdaman, hujjat keyin keladi". Soʻnggi 6 oyda 4 ta o‘xshash deepfake hujum bank sektorida ro‘y bergan. IB-606 protokoli majburiy: katta wire so‘rovlari uchun callback CEO ning ma’lum raqamiga. Sizning ekraningizda — CEO ning rasmiy raqami va sessiya yozuvchisi.',
+    whatYouSee: [
+      'Qoʻngʻiroq: notanish raqamdan · 4 daqiqa davom etmoqda · "CEO Akmal Tursunov" deb taqdim etgan.',
+      'Ovoz: uncanny (pauzalar gʻalati, intonatsiya tabiiy emas) · deepfake belgisi yuqori.',
+      'Soʻrov: 200 ming AQSh dollari wire · darhol · "savdo ulgurmasin" · hujjat keyin.',
+    ],
+    whatYouHear: [
+      '«Wire ni darhol amalga oshiring, savdo ulgurmasin. Men hozir aeroportdaman.»',
+      '«Hujjatni keyin yuboraman, hozir tasdiq berish vaqti yoʻq, ishon menga.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'CEO qoʻngʻirog‘i',
@@ -682,7 +802,22 @@ const cyberDeepfake = {
 const fraudSynthetic = {
   title: 'Synthetic identity onboarding',
   subtitle: 'FRAUD-318 · Composite ID detection',
-  proctorIntro: 'Hisob ochish soʻrovi · ID composite · 3 ta flagged adresga bog‘langan.',
+  proctorIntro: 'Onboarding konsoli oldidasiz. Yangi hisob soʻrovida composite ID belgisi paydo boʻldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Onboarding konsoli · 09:23 Dushanba',
+    context:
+      'Dushanba kuni 09:23. Siz onlayn-onboarding navbatchi tahlilchisisiz. Mobil ilovadan «Rustam Ahmedov» nomi bilan hisob ochish soʻrovi keldi. ID tekshiruvi qiziq narsani koʻrsatdi: koʻrsatilgan INN haqiqiy va davlat bazasida bor — lekin bu ism bu INN bilan birinchi marta yozilmoqda. Roʻyxatdan oʻtish adresi soʻnggi 6 oyda 3 ta turli flagged hisobga bogʻlangan. Credit file thin (yangi yaratilgan). Eng muhimi — device fingerprint boshqa flagged hisoblar ochilganda ham koʻrilgan. Bu klassik synthetic identity belgisi: real maʼlumotlardan composite identity yaratilgan, mule yoki credit fraud sxemasi uchun tayyorlangan.',
+    whatYouSee: [
+      'ID: koʻrsatilgan INN haqiqiy · ism bu INN bilan birinchi marta yozilmoqda · composite.',
+      'Adres: 6 oyda 3 ta turli flagged hisobga bogʻlangan · barchasi mule sxemasida shubha qilingan.',
+      'Device fingerprint: takroriy · 5 ta boshqa hisob ochilganda ham koʻrilgan · farma signali.',
+    ],
+    whatYouHear: [
+      'Onboarding bot: «soʻrov tasdiqlash uchun · qaror operatorga».',
+      'Fraud monitor: «device fingerprint match · cluster id 3·composite ID flagged · onboarding pauza tavsiya etiladi».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Fraud monitor',
@@ -766,7 +901,22 @@ const fraudSynthetic = {
 const fraudSkimming = {
   title: 'ATM skimming + behavioral',
   subtitle: 'FRAUD-422 · Geo velocity anomalya',
-  proctorIntro: 'Bitta karta 22 daqiqada 280 km uzoqlikda ishlatilgan. Fizik imkonsiz.',
+  proctorIntro: 'Karta monitor oldidasiz. Tizim geo velocity anomaliya aniqladi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Karta monitor · 14:08 Juma',
+    context:
+      'Juma kuni 14:08. Siz fraud monitor navbatchi tahlilchisisiz. Tizim Premium karta 4188…7733 (egasi Doniyor Rashidov, 3 yillik mijoz) boʻyicha ogohlantirish berdi: kartani 13:45 da Toshkent ATM-da 500 ming soʻm nakd olish uchun ishlatilgan, soʻngra 14:07 da Samarqand ATM-da yana 500 ming soʻm chiqarilgan. 280 km masofa, 22 daqiqada — fizikaviy jihatdan imkonsiz. Ikkala ATM ham geografik klusterda bogʻliq (oxirgi 30 kunda 8 ta shubha kartasi shu klusterdan oʻtgan). Boshqa kartalardagi CVV xatolari ham koʻpaygan. Klassik ATM skimming + clone signali.',
+    whatYouSee: [
+      'Karta: 4188…7733 · Doniyor Rashidov · Premium · 3 yil · oxirgi normal foydalanish kechagi.',
+      'Velocity: Toshkent 13:45 (500K soʻm) → Samarqand 14:07 (500K soʻm) · 280 km · 22 daqiqa.',
+      'Cluster: ikkala ATM bogʻliq · 30 kun ichida 8 ta shubha kartasi · CVV xatolari koʻpaygan.',
+    ],
+    whatYouHear: [
+      'Fraud bot: «geo velocity violation · 280 km/22 min · physically impossible».',
+      'ATM operativi (telefon): «Samarqand qurilmasiga shubhali qoplama topildi — texnik tekshiruv ketmoqda».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Card fraud',
@@ -850,7 +1000,22 @@ const fraudSkimming = {
 const fraudChargeback = {
   title: 'Chargeback triage — friendly fraud',
   subtitle: 'FRAUD-510 · Dispute defense',
-  proctorIntro: 'Mijoz delivery qabul qilganini rad etyapti. Tracking imzo ko‘rsatadi.',
+  proctorIntro: 'Chargeback konsoli oldidasiz. Yangi nizo keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Chargeback konsoli · 10:30 Seshanba',
+    context:
+      'Seshanba kuni 10:30. Siz chargeback navbatchi tahlilchisisiz. Mijoz Ozoda Yusupova (4 yillik mijoz, Premium karta) reason code 4855 («mahsulot olmadim») bilan 1240 AQSh dollarlik elektronika xaridi uchun chargeback ochdi. 5 kun avval mijoz UnionMall onlayn-do‘konida bu xaridni amalga oshirgan, billing adresi: uning roʻyxatdan oʻtgan manzil. 4 kun avval kuryer xizmati paket yetkazib bergan va imzoda «O. Yusupova» yozilgan — tracking tizimida tasvir va GPS koordinata bor. Eng muhimi: mijozning so‘nggi 12 oydagi chargeback tarixi — 11 ta nizo, deyarli har oy bittadan. Bu klassik friendly fraud (chargeback misuse) sxemasi. Visa qoidalariga koʻra 5 kun ichida defence dalillari taqdim etilishi kerak.',
+    whatYouSee: [
+      'Mijoz: Ozoda Yusupova · 4 yil mijoz · Premium karta · NPS 6.8 (oʻrtacha).',
+      'Xarid: $1240 elektronika · UnionMall onlayn-doʻkon · billing = roʻyxatdan oʻtgan manzil · 5 kun avval.',
+      'Tarix: oxirgi 12 oyda 11 ta chargeback · deyarli har oy · barchasi reason 4855.',
+    ],
+    whatYouHear: [
+      'Mijoz chargeback formasida: «Tovar yetib kelmadi, men hech narsa qabul qilmadim.»',
+      'Tracking tizimi: «Paket yetkazildi · imzo: O. Yusupova · GPS billing adresi bilan mos · vaqt 14:22».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Chargeback',
@@ -934,7 +1099,22 @@ const fraudChargeback = {
 const fraudAnomalyTuning = {
   title: 'AI anomaly model tuning',
   subtitle: 'FRAUD-630 · Threshold + backtest',
-  proctorIntro: 'Hudud to‘lov-kuni o‘zgargandan so‘ng false-positive 4.2× ortdi.',
+  proctorIntro: 'Model boshqaruvi oldidasiz. Velocity rule drift aniqlandi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Model boshqaruvi · 11:30 Chorshanba',
+    context:
+      'Chorshanba kuni 11:30. Siz Fraud AI jamoasining model muhandisisiz. Velocity rule v3.4 (11 oy avval ishga tushgan) so‘nggi 3 hafta davomida noaniq harakat qilmoqda: ya’nidir noto‘g‘ri ishlash darajasi (FP rate) odatdagidan 4.2 marta yuqori. Sabab aniqlangan — Toshkent hududida davlat sektor xodimlari uchun to‘lov-kuni 3 hafta avval 25-chiidan 5-chigacha ko‘chirildi. Bu eski velocity normasiga zid keladi. Backtest tizimi tayyor: 6 oylik tarixiy ma’lumotlar mavjud, hold-out testlash uchun imkoniyat bor. Coverage hozir 92% — tuning paytida bu past tushmasligi muhim. Modelni o‘zgartirish — bank butun fraud detection tizimi uchun kritik.',
+    whatYouSee: [
+      'Model: velocity rule v3.4 · 11 oy ishlagan · drift boshlangan vaqt: 3 hafta avval.',
+      'FP rate: 4.2× normal · sabab strukturaviy: payday Toshkent davlat sektorida 25→5 ga ko‘chirilgan.',
+      'Backtest: 6 oy tarixiy ma’lumotlar mavjud · coverage hozir 92% (saqlanishi kerak).',
+    ],
+    whatYouHear: [
+      'Fraud manager: «modelni darhol tunelagin, lekin coverage tushmasin — fraud o‘tishini xohlamaymiz».',
+      'Junior data scientist: «balki rule ni umuman o‘chirsak? FP rate juda yuqori-ku».',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Model drift',
@@ -1164,8 +1344,8 @@ const cxAccessibility = {
   actions: {
     fullSession: 'To‘liq sessiya + screen-reader walkthrough',
     fullSessionHint: 'Accessible flow ko‘rsatish · bookmark · 25 daq',
-    standardTutorial: 'Standart tutorial',
-    standardTutorialHint: 'Screen-reader uchun mos emas · navigatsiya muammosi',
+    standardTutorial: 'Standart oʻquv qoʻllanma',
+    standardTutorialHint: 'Ekran oʻqigich uchun mos emas · navigatsiya muammosi',
     redirect: 'Faqat telefon support ga yo‘naltirish',
     redirectHint: 'XATAR · online banking dan voz kechtirish',
   },
@@ -1222,13 +1402,13 @@ const cxInternalEscalation = {
     context:
       'Chorshanba kuni 15:32. Siz CX jamoasining senior konsultantisiz. Ichki SOS signali keldi — junior agent Aziz Karimov (3 hafta ish stajisi) qoʻngʻiroqda qotirilib qoldi. Mijoz — yuqori qiymatli korporativ vakili "Soylama Ltd" tarafidan, 14 yil mijoz, oxirgi 6 oyda 3 ta shikoyat ochilgan. Mijoz tovushini baland qilib, soʻkish ishlatib gapiryapti. Junior agent jim, fizikaviy reaktsiya: pulse 124, qoʻllari titramoqda. Live navbat — 4 ta qoʻngʻiroq kutmoqda. CX-440 protokoli: take-over + coach.',
     whatYouSee: [
-      'Junior agent ekrani: Aziz Karimov · 3 hafta staj · pulse monitor 124 · whisper mode aktiv.',
+      'Junior agent ekrani: Aziz Karimov · 3 hafta staj · yurak urishi 124 · yopiq rejim faol.',
       'Mijoz: Soylama Ltd vakili · 14 yil mijoz · 6 oyda 3 shikoyat · NPS sezgisi yuqori.',
-      'Jamoa: 4 ta call kutmoqda · senior manager off-site · sizning navbatingiz.',
+      'Jamoa: 4 ta qoʻngʻiroq kutmoqda · senior manager ofisdan tashqarida · sizning navbatingiz.',
     ],
     whatYouHear: [
       '«Bu yerda kim ishlayapti? Sen umuman gapira olasizmi?!»',
-      'Junior whisper-channel: «Senior, men nima qilishni bilmayapman... men yangiman.»',
+      'Junior yopiq kanaldan: «Senior, men nima qilishni bilmayapman... men yangiman.»',
     ],
     begin: 'Tahlilni boshlash',
   },

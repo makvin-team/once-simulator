@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * AML pillar · Module 4 — PEP (Politically Exposed Person) Risk.
@@ -8,18 +8,21 @@ import { makeScenario } from './_makeScenario.js';
  * standard KYC (+6), or accept (0).
  */
 
-export const amlPepScenario = makeScenario({
-  id: 'amlPep',
-  pillarId: 'aml',
-  severity: 'high',
-  defaultCards: ['#FFD86B', '#FFB68A', '#A8E5C8'],
-  indicators: [
-    { id: 'pepRole', tone: 'rose', severity: 'critical' },
-    { id: 'amount', value: '420 mln', tone: 'peach', severity: 'high' },
-    { id: 'sourceFunds', tone: 'butter', severity: 'high' },
-    { id: 'jurisdiction', tone: 'sky', severity: 'medium' },
-  ],
-  correctId: 'eddApprove',
-  partialId: 'standardKyc',
-  failId: 'accept',
-});
+export const amlPepScenario = withContext(
+  makeScenario({
+    id: 'amlPep',
+    pillarId: 'aml',
+    severity: 'high',
+    defaultCards: ['#FFD86B', '#FFB68A', '#A8E5C8'],
+    indicators: [
+      { id: 'pepRole', tone: 'rose', severity: 'critical' },
+      { id: 'amount', value: '420 mln', tone: 'peach', severity: 'high' },
+      { id: 'sourceFunds', tone: 'butter', severity: 'high' },
+      { id: 'jurisdiction', tone: 'sky', severity: 'medium' },
+    ],
+    correctId: 'eddApprove',
+    partialId: 'standardKyc',
+    failId: 'accept',
+  }),
+  'scenarios.amlPep',
+);

@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * Cyber pillar · Module 3 — Incident Response (NIST 800-61).
@@ -8,18 +8,21 @@ import { makeScenario } from './_makeScenario.js';
  * backups immediately (+6), pay ransom (0).
  */
 
-export const cyberIncidentResponseScenario = makeScenario({
-  id: 'cyberIncidentResponse',
-  pillarId: 'cyber',
-  severity: 'critical',
-  defaultCards: ['#FFB3C0', '#FFB68A', '#FFD86B'],
-  indicators: [
-    { id: 'spread', tone: 'rose', severity: 'critical' },
-    { id: 'department', tone: 'peach', severity: 'high' },
-    { id: 'backups', tone: 'mint', severity: 'medium' },
-    { id: 'ransom', tone: 'rose', severity: 'critical' },
-  ],
-  correctId: 'containEradicate',
-  partialId: 'restoreBackup',
-  failId: 'payRansom',
-});
+export const cyberIncidentResponseScenario = withContext(
+  makeScenario({
+    id: 'cyberIncidentResponse',
+    pillarId: 'cyber',
+    severity: 'critical',
+    defaultCards: ['#FFB3C0', '#FFB68A', '#FFD86B'],
+    indicators: [
+      { id: 'spread', tone: 'rose', severity: 'critical' },
+      { id: 'department', tone: 'peach', severity: 'high' },
+      { id: 'backups', tone: 'mint', severity: 'medium' },
+      { id: 'ransom', tone: 'rose', severity: 'critical' },
+    ],
+    correctId: 'containEradicate',
+    partialId: 'restoreBackup',
+    failId: 'payRansom',
+  }),
+  'scenarios.cyberIncidentResponse',
+);
