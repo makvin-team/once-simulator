@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion';
 
-/**
- * Large "decision" button that copies Medkit's `btn-plush primary breathe`
- * pattern — bold label, optional hint, plush shadow, soft breathing animation
- * on the primary call-to-action.
- *
- * In the AML scenario these surface as **File SAR / Release / Escalate**.
- */
 
 const TONE_BG = {
   mint: 'var(--mint)',

@@ -4,18 +4,6 @@ import { RiskIndicatorStrip } from './RiskIndicatorStrip.jsx';
 import { ActionButton } from './ActionButton.jsx';
 import { useT } from '../../i18n/index.js';
 
-/**
- * The "inspect" overlay — opens when the user clicks the notification CTA.
- *
- * Mirrors Medkit's ExamineOverlay: a centered modal with a backdrop blur,
- * a tagged header strip, a "vitals" row (RiskIndicatorStrip), a timeline,
- * and the decision buttons at the bottom. Backdrop click closes it.
- *
- * The decision buttons are the **action buttons** that Medkit uses for quick
- * interactions (Approve/Reject/Escalate). Each carries a `tone`, optional
- * `isPrimary` flag (gets the breathe animation), and an i18n action+hint.
- */
-
 export function TransactionDetailsPanel({ node, visible, onClose, onChoose }) {
   const t = useT();
   if (!node) return null;

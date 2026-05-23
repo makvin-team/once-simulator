@@ -1,17 +1,5 @@
 import { motion } from 'framer-motion';
 
-/**
- * The base "plush floating panel" that every HUD overlay sits inside.
- *
- * This is the bank-themed reinterpretation of Medkit's docked panels:
- * white (or tinted) background, 3px black outline, plush drop shadow,
- * rounded `var(--r-md)` corners. NOT translucent glass — saved user
- * feedback rejects dark/glass-morphism aesthetics for this product.
- *
- * `tone` picks one of the palette tints. `tilt` rotates by a fractional
- * degree for the hand-drawn feel. `pad` controls inner padding (sm/md/lg).
- */
-
 const TONES = {
   white: { background: 'white' },
   cream: { background: 'var(--cream-2)' },

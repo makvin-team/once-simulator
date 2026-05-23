@@ -3,17 +3,6 @@ import { motion } from 'framer-motion';
 import { HudPanel } from './HudPanel.jsx';
 import { useT } from '../../i18n/index.js';
 
-/**
- * Top-right docked status panel — mirrors Medkit's `DockedVoicePanel`.
- *
- * Shows: AI Proctor identity + live status badge ("LISTENING…" /
- * "THINKING…" / "READY") + latest instruction subtitle.
- *
- * Status is driven externally via props so the same panel can be reused
- * by other pillars (cyber/cx) later. Subtitle types itself in character-
- * by-character for the cozy "the proctor is speaking" feel.
- */
-
 const STATUS_COLOR = {
   listening: 'var(--peach-deep)',
   thinking: 'var(--butter-deep)',

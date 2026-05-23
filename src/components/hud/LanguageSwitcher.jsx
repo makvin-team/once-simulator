@@ -1,12 +1,6 @@
 import { useAvailableLocales } from '../../i18n/index.js';
 import { useAppStore } from '../../state/useAppStore.js';
 
-/**
- * Three-button language switcher. Used in the top bar of every page so the
- * user can switch UZ/RU/EN at any time — copy updates live because the
- * `useT()` hook subscribes to the store's `locale` field.
- */
-
 export function LanguageSwitcher({ tone = 'cream' }) {
   const locales = useAvailableLocales();
   const active = useAppStore((s) => s.locale);

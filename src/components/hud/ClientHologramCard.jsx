@@ -2,15 +2,6 @@ import { motion } from 'framer-motion';
 import { HudPanel } from './HudPanel.jsx';
 import { useT } from '../../i18n/index.js';
 
-/**
- * High-quality 2D "client hologram" card — the user explicitly asked us NOT
- * to use low-poly 3D humans for the client. Instead, when a client is on
- * the scene, this card floats over the 3D view with a cleanly-illustrated
- * portrait inside a peach holo-ring.
- *
- * The portrait is a vector SVG — businessman in a suit, neutral expression,
- * ID badge clipped to the lapel — readable at any size, no texture pop.
- */
 
 export function ClientHologramCard({ nameI18n, metaI18n, position = 'bottom-left' }) {
   const t = useT();

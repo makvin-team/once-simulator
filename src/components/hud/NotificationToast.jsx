@@ -3,18 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HudPanel } from './HudPanel.jsx';
 import { useT } from '../../i18n/index.js';
 
-/**
- * THE KEY MEDKIT-CLONED MECHANIC.
- *
- * Slides in from the top centre when the scenario's "alert" node fires.
- * Mirrors Medkit's incoming-complaint pattern: tag chip + bold title + one
- * subtitle line + meta line + two action buttons (CTA + dismiss). A live
- * countdown progress bar runs along the bottom for time pressure.
- *
- * The toast does NOT auto-advance — the user must click `CTA` (which opens
- * the TransactionDetailsPanel). Dismissing leaves the notification visible
- * as a small "1" badge that the user can re-open (handled by the parent).
- */
 
 const COUNTDOWN_MS = 15_000;
 

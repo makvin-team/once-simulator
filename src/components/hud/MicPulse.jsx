@@ -1,18 +1,6 @@
 import { motion } from 'framer-motion';
 import { useT } from '../../i18n/index.js';
 
-/**
- * Medkit-cloned mic button with the "Listening..." pulse ring animation.
- *
- * - Idle:      static peach circle, label = "Tap to speak"
- * - Listening: breathing ring + pulsing outer halo
- * - Thinking:  butter ring + rotating dots
- * - Speaking:  mint ring, steady
- *
- * The mic itself is simulated — there's no real STT in the pilot. Clicking
- * it just toggles the listening visual and triggers the same "you spoke"
- * affordance that selecting a screen choice does.
- */
 
 const STATUS_TONE = {
   idle: '#FFD86B',

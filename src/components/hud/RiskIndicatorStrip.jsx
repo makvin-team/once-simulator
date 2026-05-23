@@ -1,14 +1,5 @@
 import { useT } from '../../i18n/index.js';
 
-/**
- * The "vitals strip" equivalent for AML — a row of colored chips with
- * icon + value + unit + label. Copies Medkit's `Vital` card layout but
- * with bank risk-domain icons and severity-driven coloring.
- *
- * Each indicator carries an `id` that's used to look up its label/unit/hint
- * from the i18n tree under `amlScenario.txPanel.indicators.{id}`.
- */
-
 const TONE = {
   rose: { bg: 'var(--rose)', icon: '⚠' },
   peach: { bg: 'var(--peach)', icon: '$' },
