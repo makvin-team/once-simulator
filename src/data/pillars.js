@@ -101,103 +101,103 @@ export const PILLAR_ORDER = PILLAR_IDS
 export const MODULE_TITLES = {
   'aml.m1': {
     uz: 'Shubhali tranzaksiya · CTR/SAR',
+    uz_cyrl: 'Шубҳали транзаксия · CTR/SAR',
     ru: 'Подозрительная транзакция · CTR/SAR',
-    en: 'Suspicious Transaction · CTR/SAR',
   },
   'aml.m2': {
     uz: 'KYC chuqurlashtirilgan · benefitsiar',
+    uz_cyrl: 'KYC чуқурлаштирилган · бенефициар',
     ru: 'Углублённый KYC · бенефициар',
-    en: 'KYC Deep-Dive · Beneficial Ownership',
   },
   'aml.m3': {
     uz: 'Sanksiya tekshiruvi · OFAC/UN',
+    uz_cyrl: 'Санксия текшируви · OFAC/UN',
     ru: 'Проверка санкций · OFAC/UN',
-    en: 'Sanctions Screening · OFAC/UN',
   },
   'aml.m4': {
     uz: 'PEP risk · siyosiy shaxslar',
+    uz_cyrl: 'PEP риск · сиёсий шахслар',
     ru: 'PEP-риск · политические лица',
-    en: 'PEP Risk · Politically Exposed',
   },
   'aml.m5': {
     uz: 'SAR yozish · amaliyot',
+    uz_cyrl: 'SAR ёзиш · амалиёт',
     ru: 'Написание SAR · практика',
-    en: 'SAR Writing · Practical',
   },
   'cyber.m1': {
     uz: 'Phishing triage · domen tahlili',
+    uz_cyrl: 'Phishing triage · домен таҳлили',
     ru: 'Phishing triage · анализ домена',
-    en: 'Phishing Triage · Domain Analysis',
   },
   'cyber.m2': {
     uz: 'SOC alert triage',
+    uz_cyrl: 'SOC alert triage',
     ru: 'SOC alert triage',
-    en: 'SOC Alert Triage',
   },
   'cyber.m3': {
     uz: 'Incident response · NIST 800-61',
+    uz_cyrl: 'Incident response · NIST 800-61',
     ru: 'Incident response · NIST 800-61',
-    en: 'Incident Response · NIST 800-61',
   },
   'cyber.m4': {
     uz: 'Zero Trust kirish',
+    uz_cyrl: 'Zero Trust кириш',
     ru: 'Zero Trust доступ',
-    en: 'Zero Trust Access',
   },
   'cyber.m5': {
     uz: 'Deepfake ovoz verifikatsiyasi',
+    uz_cyrl: 'Deepfake овоз верификацияси',
     ru: 'Верификация голоса deepfake',
-    en: 'Deepfake Voice Verification',
   },
   'fraud.m1': {
     uz: 'Velocity pattern detection',
+    uz_cyrl: 'Velocity pattern detection',
     ru: 'Velocity pattern detection',
-    en: 'Velocity Pattern Detection',
   },
   'fraud.m2': {
     uz: 'Mule hisob aniqlash',
+    uz_cyrl: 'Mule ҳисоб аниқлаш',
     ru: 'Поиск mule-счетов',
-    en: 'Mule Account Spotting',
   },
   'fraud.m3': {
     uz: 'Karta skimming · behavioral',
+    uz_cyrl: 'Карта skimming · behavioral',
     ru: 'Card skimming · поведение',
-    en: 'Card Skimming · Behavioural',
   },
   'fraud.m4': {
     uz: 'Chargeback triage',
+    uz_cyrl: 'Chargeback triage',
     ru: 'Chargeback triage',
-    en: 'Chargeback Triage',
   },
   'fraud.m5': {
     uz: 'AI anomaly tuning',
+    uz_cyrl: 'AI anomaly tuning',
     ru: 'AI anomaly tuning',
-    en: 'AI Anomaly Tuning',
   },
   'cx.m1': {
     uz: 'Qiyin mijoz · de-eskalatsiya',
+    uz_cyrl: 'Қийин мижоз · де-эскалация',
     ru: 'Сложный клиент · де-эскалация',
-    en: 'Difficult Customer · De-escalation',
   },
   'cx.m2': {
     uz: 'Manzil oʻzgartirish · verifikatsiya',
+    uz_cyrl: 'Манзил ўзгартириш · верификация',
     ru: 'Смена адреса · верификация',
-    en: 'Address Change · Verification',
   },
   'cx.m3': {
     uz: 'Hisob bloklash · empatiya',
+    uz_cyrl: 'Ҳисоб блоклаш · эмпатия',
     ru: 'Блокировка счёта · эмпатия',
-    en: 'Account Block · Empathy',
   },
   'cx.m4': {
     uz: 'Imkoniyati cheklangan mijoz',
+    uz_cyrl: 'Имконияти чекланган мижоз',
     ru: 'Клиент с ограничениями',
-    en: 'Customer with Disability',
   },
   'cx.m5': {
     uz: 'Ichki eskalatsiya protokoli',
+    uz_cyrl: 'Ички эскалация протоколи',
     ru: 'Внутренний протокол эскалации',
-    en: 'Internal Escalation Protocol',
   },
 };
 

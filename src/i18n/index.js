@@ -2,21 +2,26 @@
  * Lightweight i18n. No dependencies — the Zustand store holds `locale`, and
  * `useT()` returns the translation tree for the active language.
  *
+ * Locales: Uzbek (Latin), Uzbek (Cyrillic), Russian. Default is Cyrillic
+ * because most banking documentation in Uzbekistan is still produced in
+ * Cyrillic, especially in compliance/AML contexts.
+ *
  * Adding a language = add a file under `translations/` and register it here.
  */
 import { uz } from './translations/uz.js';
+import { uz_cyrl } from './translations/uz_cyrl.js';
 import { ru } from './translations/ru.js';
-import { en } from './translations/en.js';
 import { useAppStore } from '../state/useAppStore.js';
 
-export const LOCALES = ['uz', 'ru', 'en'];
+export const LOCALES = ['uz', 'uz_cyrl', 'ru'];
 
-const TRANSLATIONS = { uz, ru, en };
+const TRANSLATIONS = { uz, uz_cyrl, ru };
 
-export const DEFAULT_LOCALE = 'uz';
+export const DEFAULT_LOCALE = 'uz_cyrl';
 
 /**
- * Resolve the translation tree for a locale. Falls back to Uzbek if unknown.
+ * Resolve the translation tree for a locale. Falls back to the default
+ * locale if unknown.
  */
 export function getTranslations(locale) {
   return TRANSLATIONS[locale] ?? TRANSLATIONS[DEFAULT_LOCALE];
