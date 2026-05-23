@@ -5,8 +5,10 @@ import { amlRedFlagsScenario } from './amlRedFlags.js';
 import { fakeDocumentScenario } from './fakeDocument.js';
 import { socialEngineeringScenario } from './socialEngineering.js';
 import { productivityScenario } from './productivity.js';
+import { amlSuspiciousTransactionScenario } from './amlSuspiciousTransaction.js';
 
 export const scenarios = {
+  amlSuspiciousTransaction: amlSuspiciousTransactionScenario,
   clientService: clientServiceScenario,
   antiFraudPhish: antiFraudPhishScenario,
   deepfakeCall: deepfakeCallScenario,
