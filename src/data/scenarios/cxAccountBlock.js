@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * CX pillar · Module 2 — Account Block + Empathy.
@@ -9,18 +9,21 @@ import { makeScenario } from './_makeScenario.js';
  * lift (+10), strict protocol-only handling (+6), dismiss complaint (0).
  */
 
-export const cxAccountBlockScenario = makeScenario({
-  id: 'cxAccountBlock',
-  pillarId: 'cx',
-  severity: 'medium',
-  defaultCards: ['#A8E5C8', '#A6D8FF', '#FFB68A'],
-  indicators: [
-    { id: 'reason', tone: 'butter', severity: 'medium' },
-    { id: 'tenure', value: '5.4y', tone: 'mint', severity: 'low' },
-    { id: 'urgency', tone: 'peach', severity: 'high' },
-    { id: 'fraudRisk', tone: 'sky', severity: 'low' },
-  ],
-  correctId: 'empathyTemp',
-  partialId: 'protocolOnly',
-  failId: 'dismiss',
-});
+export const cxAccountBlockScenario = withContext(
+  makeScenario({
+    id: 'cxAccountBlock',
+    pillarId: 'cx',
+    severity: 'medium',
+    defaultCards: ['#A8E5C8', '#A6D8FF', '#FFB68A'],
+    indicators: [
+      { id: 'reason', tone: 'butter', severity: 'medium' },
+      { id: 'tenure', value: '5.4y', tone: 'mint', severity: 'low' },
+      { id: 'urgency', tone: 'peach', severity: 'high' },
+      { id: 'fraudRisk', tone: 'sky', severity: 'low' },
+    ],
+    correctId: 'empathyTemp',
+    partialId: 'protocolOnly',
+    failId: 'dismiss',
+  }),
+  'scenarios.cxAccountBlock',
+);

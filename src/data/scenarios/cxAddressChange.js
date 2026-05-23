@@ -30,7 +30,19 @@ export const cxAddressChangeScenario = {
     intro: {
       kind: 'proctor',
       textI18n: 'cxScenario.proctorIntro',
-      autoAdvance: { afterMs: 2000, toNodeId: 'alert' },
+      autoAdvance: { afterMs: 2200, toNodeId: 'context' },
+    },
+
+    context: {
+      kind: 'context',
+      tagI18n: 'cxScenario.caseContext.tag',
+      contextI18n: 'cxScenario.caseContext.context',
+      whatYouSeeI18n: 'cxScenario.caseContext.whatYouSee',
+      whatYouHearI18n: 'cxScenario.caseContext.whatYouHear',
+      beginI18n: 'cxScenario.caseContext.begin',
+      choices: [
+        { id: 'begin', nextNodeId: 'alert', points: 0 },
+      ],
     },
 
     alert: {

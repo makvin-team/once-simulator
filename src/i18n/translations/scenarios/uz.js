@@ -1018,7 +1018,22 @@ const fraudAnomalyTuning = {
 const cxAccountBlock = {
   title: 'Hisob bloklash · empatiya',
   subtitle: 'CX-220 · Velocity false positive',
-  proctorIntro: 'Premium mijoz uyqudan turdi — kartasi bloklangan. Samolyotga 90 daqiqa qoldi.',
+  proctorIntro: 'Premium liniya navbatchisisiz. Mijozdan asabiy qoʻngʻiroq keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Premium support · 07:42 Seshanba',
+    context:
+      'Seshanba tongi 07:42. Siz Premium support liniyasining navbatchisiz. Qoʻngʻiroq qiladi Dilfuza Yusupova, 5.4 yil bizning mijozimiz, NPS 9.4. Kechagi tunda velocity rule 5 ta tranzaksiyasidan keyin uning kartasini auto-block qildi — barchasi profil va xarajat patternga toʻgʻri keladi, klassik false positive. SMS ogohlantirish yuborilgan, lekin mijoz uyqu paytida koʻrmagan. Hozir aeroportga 90 daqiqa qoldi, mijoz asabiy, baqirayapti. Fraud risk skor past — profil mos.',
+    whatYouSee: [
+      'CRM: Dilfuza Yusupova · Premium · 5.4 yil · NPS 9.4 · oxirgi yil 0 ta chargeback.',
+      'Block sababi: velocity rule (5 tranzaksiya 12 daq ichida) · profil mos · fraud risk past.',
+      'Vaqt bosimi: aeroportga 90 daqiqa · samolyot Dubay · supervisor on-call.',
+    ],
+    whatYouHear: [
+      '«Karta ishlamaydi, men aeroportdaman — siz mendan pul tortib oldingizmi?»',
+      '«Men 5 yildan beri sizning mijozingizman, bu nima ahvol bu?»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Mijoz xizmati',
@@ -1102,7 +1117,22 @@ const cxAccountBlock = {
 const cxAccessibility = {
   title: 'Imkoniyati cheklangan mijoz',
   subtitle: 'CX-330 · Accessibility · assistive tech',
-  proctorIntro: 'Ko‘rish qobiliyati cheklangan mijoz online banking bilan qiynalmoqda.',
+  proctorIntro: 'Accessibility yordam liniyasi olidasiz. Mijozdan murojaat keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Accessibility yordami · 10:18 Dushanba',
+    context:
+      'Dushanba kuni 10:18. Siz Accessibility yordam liniyasining navbatchisiz. Qoʻngʻiroq qiladi Murod Rahimov (INN 30412840290007), 4.1 yil bizning mijozimiz. U koʻrish qobiliyatini yoʻqotgan — NVDA screen-reader bilan ishlaydi. Yangi online banking interfeysida pul oʻtkazma sahifasi yaroqsiz — tugmalarda ARIA label yoʻq, balans matni alt-text emas, "Tasdiqlash" tugmasi ekran oʻqigich tomonidan topilmayapti. Mijoz allaqachon 25 daqiqa sahifani aylanib chiqdi, ovozida charchoq sezilmoqda. Bizning Accessibility manualʼimiz §3 talab qiladi: full guided session + bookmark qilingan accessible flowlar.',
+    whatYouSee: [
+      'CRM: Murod Rahimov · INN 30412840290007 · 4.1 yil mijoz · accessibility flag: koʻrish.',
+      'Mahsulot: yangi online banking (v3.2) · ARIA audit hali oʻtmagan · screen-reader compat past.',
+      'Sessiya tarixi: oxirgi 25 daqiqa · 7 ta muvaffaqiyatsiz urinish · oxirgi sahifa "transfer/confirm".',
+    ],
+    whatYouHear: [
+      '«Tasdiqlash tugmasini topa olmayapman, sahifa screen-reader bilan ishlamayapti.»',
+      '«Avvalgi versiyada oʻzim qila olardim, endi yordam kerak — bu adolatsizlik.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Mijoz yordami',
@@ -1186,7 +1216,22 @@ const cxAccessibility = {
 const cxInternalEscalation = {
   title: 'Ichki eskalatsiya protokoli',
   subtitle: 'CX-440 · Junior agent qo‘llab-quvvatlash',
-  proctorIntro: 'Junior agent agressiv mijozga qotib qoldi. Mijoz baqirayapti.',
+  proctorIntro: 'Senior konsultant ekraningiz oldidasiz. Junior agentdan ichki SOS keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Ichki SOS · 15:32 Chorshanba',
+    context:
+      'Chorshanba kuni 15:32. Siz CX jamoasining senior konsultantisiz. Ichki SOS signali keldi — junior agent Aziz Karimov (3 hafta ish stajisi) qoʻngʻiroqda qotirilib qoldi. Mijoz — yuqori qiymatli korporativ vakili "Soylama Ltd" tarafidan, 14 yil mijoz, oxirgi 6 oyda 3 ta shikoyat ochilgan. Mijoz tovushini baland qilib, soʻkish ishlatib gapiryapti. Junior agent jim, fizikaviy reaktsiya: pulse 124, qoʻllari titramoqda. Live navbat — 4 ta qoʻngʻiroq kutmoqda. CX-440 protokoli: take-over + coach.',
+    whatYouSee: [
+      'Junior agent ekrani: Aziz Karimov · 3 hafta staj · pulse monitor 124 · whisper mode aktiv.',
+      'Mijoz: Soylama Ltd vakili · 14 yil mijoz · 6 oyda 3 shikoyat · NPS sezgisi yuqori.',
+      'Jamoa: 4 ta call kutmoqda · senior manager off-site · sizning navbatingiz.',
+    ],
+    whatYouHear: [
+      '«Bu yerda kim ishlayapti? Sen umuman gapira olasizmi?!»',
+      'Junior whisper-channel: «Senior, men nima qilishni bilmayapman... men yangiman.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Internal SOS',
@@ -1270,7 +1315,22 @@ const cxInternalEscalation = {
 const cxComplexCustomer = {
   title: 'Murakkab mijoz · 3 ta soʻrov',
   subtitle: 'CX-550 · Multi-product triage',
-  proctorIntro: '8 yillik Premium mijoz statementni jamlash, foiz qayta ko‘rib, beneficiar o‘zgartirish so‘rayapti.',
+  proctorIntro: 'Premium liniya navbatchisisiz. Uzoq yillik mijozdan kompleks soʻrov keldi — vaziyatni oʻrganing.',
+  caseContext: {
+    tag: 'Vaziyat · Premium support · 11:15 Juma',
+    context:
+      'Juma kuni 11:15. Premium support liniyasining navbatchisiz. Qoʻngʻiroq qiladi Zafar Karimov, 8.7 yil bizning mijozimiz, NPS 9.6. U bizning bankda 5 ta faol mahsulot saqlaydi: depozit, ipoteka, kreditka, brokerlik hisobi, sugʻurta. Hisobida 3 ta oila aʼzosi vakil sifatida yozilgan. Bir qoʻngʻiroqda u 3 ta katta soʻrov koʻtaryapti: (1) barcha 5 mahsulot uchun yagona oylik statement; (2) ipoteka foizini qayta koʻrib chiqish (2 yil avval 17% bilan olingan); (3) brokerlik hisobida beneficiar oʻzgartirish (otasi vafot etgan). Har bir soʻrov alohida bo‘limga taalluqli, har biri 15-20 daqiqa vaqt oladi. Mijoz xotirjam, lekin charchagan ohangda.',
+    whatYouSee: [
+      'CRM: Zafar Karimov · INN 30412840190201 · Premium · 8.7 yil · NPS 9.6 · 5 mahsulot.',
+      'Soʻrovlar: (a) konsolidatsiyalangan statement, (b) ipoteka qayta-koʻrish, (c) beneficiar oʻzgarishi.',
+      'Hisobiy: 5 ta mahsulot · 3 ta oila vakili · oxirgi qoʻngʻiroq 90 kun avval.',
+    ],
+    whatYouHear: [
+      '«Hammasini bitta qoʻngʻiroqda hal qilamiz, vaqtim juda kam.»',
+      '«Otam vafot etdi, brokerlik hisobida beneficiar oʻzgartirish kerak — boshqalari ham bir vaqtda boʻladi.»',
+    ],
+    begin: 'Tahlilni boshlash',
+  },
   proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
   notification: {
     tag: 'Multi-soʻrov',

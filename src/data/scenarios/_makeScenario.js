@@ -171,6 +171,35 @@ export function makeScenario(opts) {
   };
 }
 
+/**
+ * Mutate a scenario in place to insert a case-context node between intro
+ * and alert. The new node lives at `nodes.context`; intro.autoAdvance is
+ * rerouted to it. Translations are read from `${i18nRoot}.caseContext.*`
+ * so each scenario can author its own narrative.
+ *
+ *   intro (proctor) → context (case brief) → alert (notification) → ...
+ *
+ * Used by the CX pillar to bring its scenarios up to the AML / Cyber /
+ * Fraud quality bar without duplicating the factory boilerplate.
+ */
+export function withContext(scenario, i18nRoot) {
+  if (!scenario?.nodes) return scenario;
+  const intro = scenario.nodes.intro;
+  if (intro?.autoAdvance) {
+    intro.autoAdvance = { ...intro.autoAdvance, toNodeId: 'context' };
+  }
+  scenario.nodes.context = {
+    kind: 'context',
+    tagI18n: `${i18nRoot}.caseContext.tag`,
+    contextI18n: `${i18nRoot}.caseContext.context`,
+    whatYouSeeI18n: `${i18nRoot}.caseContext.whatYouSee`,
+    whatYouHearI18n: `${i18nRoot}.caseContext.whatYouHear`,
+    beginI18n: `${i18nRoot}.caseContext.begin`,
+    choices: [{ id: 'begin', nextNodeId: 'alert', points: 0 }],
+  };
+  return scenario;
+}
+
 function cardKey(i) {
   return ['a', 'b', 'c', 'd'][i] ?? `c${i}`;
 }

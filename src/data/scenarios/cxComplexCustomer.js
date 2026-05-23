@@ -1,4 +1,4 @@
-import { makeScenario } from './_makeScenario.js';
+import { makeScenario, withContext } from './_makeScenario.js';
 
 /**
  * CX pillar · Module 5 — Complex Customer / Multi-Product Reconcile.
@@ -10,18 +10,21 @@ import { makeScenario } from './_makeScenario.js';
  * handling now + callback (+6), one product only (0).
  */
 
-export const cxComplexCustomerScenario = makeScenario({
-  id: 'cxComplexCustomer',
-  pillarId: 'cx',
-  severity: 'medium',
-  defaultCards: ['#A6D8FF', '#A8E5C8', '#FFD86B'],
-  indicators: [
-    { id: 'products', tone: 'sky', severity: 'medium' },
-    { id: 'requests', tone: 'butter', severity: 'medium' },
-    { id: 'tenure', value: '8.7y', tone: 'mint', severity: 'low' },
-    { id: 'satisfaction', tone: 'peach', severity: 'medium' },
-  ],
-  correctId: 'structuredTriage',
-  partialId: 'partialCallback',
-  failId: 'oneOnly',
-});
+export const cxComplexCustomerScenario = withContext(
+  makeScenario({
+    id: 'cxComplexCustomer',
+    pillarId: 'cx',
+    severity: 'medium',
+    defaultCards: ['#A6D8FF', '#A8E5C8', '#FFD86B'],
+    indicators: [
+      { id: 'products', tone: 'sky', severity: 'medium' },
+      { id: 'requests', tone: 'butter', severity: 'medium' },
+      { id: 'tenure', value: '8.7y', tone: 'mint', severity: 'low' },
+      { id: 'satisfaction', tone: 'peach', severity: 'medium' },
+    ],
+    correctId: 'structuredTriage',
+    partialId: 'partialCallback',
+    failId: 'oneOnly',
+  }),
+  'scenarios.cxComplexCustomer',
+);

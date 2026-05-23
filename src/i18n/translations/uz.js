@@ -433,7 +433,22 @@ export const uz = {
     title: 'Qiyin mijoz — manzil oʻzgartirish',
     subtitle: 'CX-118 · de-eskalatsiya va verifikatsiya',
     proctorIntro:
-      'Premium mijoz telefon orqali manzil oʻzgartirishni soʻraydi. 2FA qurilmasi yoʻq, asabiy.',
+      'Mijoz xizmati liniyasi oldidasiz. Premium mijozdan qoʻngʻiroq keldi — vaziyatni oʻrganing.',
+    caseContext: {
+      tag: 'Vaziyat · Premium support · 14:05 Payshanba',
+      context:
+        'Payshanba kuni 14:05. Siz Premium support liniyasining navbatchi konsultantisiz. Qoʻngʻiroq qiladi Mavluda Tursunova (INN 30312840290101), 6.2 yil bizning mijozimiz, NPS 9.1. U manzilini darhol oʻzgartirishni soʻraydi — "samolyotga ulgurish kerak, hozir oʻzgartiring". 2FA qurilmasi yoʻq — "yoʻqotdim, vaqt yoʻq pasportim ham yoʻq" deydi. Manzil oʻzgartirish KYC §3.4 boʻyicha yuqori risk operatsiya: 2FA yoki filial verifikatsiyasi talab qilinadi. Mijoz baqirishni boshlaydi, ovozi keskinlashadi.',
+      whatYouSee: [
+        'CRM: Mavluda Tursunova · INN 30312840290101 · Premium · 6.2 yil tenure · NPS 9.1.',
+        'Kanal: telefon (Premium liniya) · audio identifikatsiya faqat ovoz boʻyicha · 2FA aktiv emas.',
+        'Soʻrov: manzil oʻzgartirish · KYC §3.4 yuqori risk · 5 daqiqada qaror talab qilinadi.',
+      ],
+      whatYouHear: [
+        '«Manzilni hozir oʻzgartiring, samolyotga ulgurish kerak.»',
+        '«2FA qurilmasini yoʻqotdim, vaqtim yoʻq, pasport ham yoʻnimda emas.»',
+      ],
+      begin: 'Tahlilni boshlash',
+    },
     proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
     notification: {
       tag: 'Mijoz xizmati',
