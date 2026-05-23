@@ -9,7 +9,15 @@ import { ProctorPanel } from '../../components/hud/ProctorPanel.jsx';
 import { ClientHologramCard } from '../../components/hud/ClientHologramCard.jsx';
 import { NotificationToast } from '../../components/hud/NotificationToast.jsx';
 import { TransactionDetailsPanel } from '../../components/hud/TransactionDetailsPanel.jsx';
+import { CaseContextCard } from '../../components/hud/CaseContextCard.jsx';
 import { LanguageSwitcher } from '../../components/hud/LanguageSwitcher.jsx';
+import { UserStatsBar } from '../../components/hud/UserStatsBar.jsx';
+
+// Browser TTS is temporarily off — uneven voice availability across
+// platforms (Uzbek voices missing on most installs, Russian fallback
+// reading Latin Uzbek as gibberish) made it net-negative for trainees.
+// Re-enable by flipping this flag.
+const TTS_ENABLED = false;
 
 /**
  * PHASE 3 DELIVERABLE — the AML "Suspicious Transaction" 3D scenario view.
@@ -84,6 +92,7 @@ export function AmlSimulationView() {
   const spokenText = useMemo(() => {
     if (!node) return '';
     if (node.kind === 'proctor') return readPath(t, node.textI18n) ?? '';
+    if (node.kind === 'context') return readPath(t, node.contextI18n) ?? '';
     if (node.kind === 'notification') {
       const title = readPath(t, node.titleI18n) ?? '';
       const subtitle = readPath(t, node.subtitleI18n) ?? '';
@@ -103,6 +112,10 @@ export function AmlSimulationView() {
   // inside speak() so a mid-sentence language switch interrupts the old
   // utterance and starts the new one.
   useEffect(() => {
+    if (!TTS_ENABLED) {
+      stop();
+      return undefined;
+    }
     if (!spokenText) return undefined;
     say(spokenText, locale);
     return () => stop();
@@ -229,6 +242,20 @@ export function AmlSimulationView() {
         visible={inspectorOpen && node.kind === 'inspect'}
         onChoose={pickChoice}
       />
+
+      {node.kind === 'context' && (
+        <CaseContextCard
+          caseTagLabel={readPath(t, node.tagI18n) ?? undefined}
+          contextText={readPath(t, node.contextI18n) ?? ''}
+          whatYouSee={readPath(t, node.whatYouSeeI18n)}
+          whatYouHear={readPath(t, node.whatYouHearI18n)}
+          beginLabel={readPath(t, node.beginI18n) ?? undefined}
+          onBegin={() => {
+            const next = node.choices?.[0]?.nextNodeId ?? node.nextNodeId;
+            if (next) advanceTo(next);
+          }}
+        />
+      )}
     </motion.div>
   );
 }
@@ -332,7 +359,15 @@ function TopBar({ title, subtitle, pillarLabel, pillarTone, onExit }) {
           </span>
         </div>
       </div>
-      <div style={{ marginLeft: 'auto' }}>
+      <div
+        style={{
+          marginLeft: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+        }}
+      >
+        <UserStatsBar />
         <LanguageSwitcher tone="white" />
       </div>
     </div>

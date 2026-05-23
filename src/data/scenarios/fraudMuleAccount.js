@@ -30,7 +30,19 @@ export const fraudMuleAccountScenario = {
     intro: {
       kind: 'proctor',
       textI18n: 'fraudScenario.proctorIntro',
-      autoAdvance: { afterMs: 2000, toNodeId: 'alert' },
+      autoAdvance: { afterMs: 2200, toNodeId: 'context' },
+    },
+
+    context: {
+      kind: 'context',
+      tagI18n: 'fraudScenario.caseContext.tag',
+      contextI18n: 'fraudScenario.caseContext.context',
+      whatYouSeeI18n: 'fraudScenario.caseContext.whatYouSee',
+      whatYouHearI18n: 'fraudScenario.caseContext.whatYouHear',
+      beginI18n: 'fraudScenario.caseContext.begin',
+      choices: [
+        { id: 'begin', nextNodeId: 'alert', points: 0 },
+      ],
     },
 
     alert: {

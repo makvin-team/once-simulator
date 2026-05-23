@@ -3,6 +3,7 @@ import {PILLARS, getModuleTitle} from '../../data/pillars.js';
 import {useAppStore} from '../../state/useAppStore.js';
 import {useT, format} from '../../i18n/index.js';
 import {LanguageSwitcher} from '../../components/hud/LanguageSwitcher.jsx';
+import {UserStatsBar} from '../../components/hud/UserStatsBar.jsx';
 
 /**
  * Module Dashboard — second page of the flow.
@@ -111,7 +112,10 @@ function TopBar({onExit}) {
             >
                 ← {t.modules.chooseAnother}
             </button>
-            <LanguageSwitcher/>
+            <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
+                <UserStatsBar/>
+                <LanguageSwitcher/>
+            </div>
         </div>
     );
 }

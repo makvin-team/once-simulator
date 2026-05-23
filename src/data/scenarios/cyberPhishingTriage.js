@@ -33,7 +33,19 @@ export const cyberPhishingTriageScenario = {
     intro: {
       kind: 'proctor',
       textI18n: 'cyberScenario.proctorIntro',
-      autoAdvance: { afterMs: 2000, toNodeId: 'alert' },
+      autoAdvance: { afterMs: 2200, toNodeId: 'context' },
+    },
+
+    context: {
+      kind: 'context',
+      tagI18n: 'cyberScenario.caseContext.tag',
+      contextI18n: 'cyberScenario.caseContext.context',
+      whatYouSeeI18n: 'cyberScenario.caseContext.whatYouSee',
+      whatYouHearI18n: 'cyberScenario.caseContext.whatYouHear',
+      beginI18n: 'cyberScenario.caseContext.begin',
+      choices: [
+        { id: 'begin', nextNodeId: 'alert', points: 0 },
+      ],
     },
 
     alert: {

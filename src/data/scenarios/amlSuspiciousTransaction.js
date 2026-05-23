@@ -51,7 +51,19 @@ export const amlSuspiciousTransactionScenario = {
     intro: {
       kind: 'proctor',
       textI18n: 'amlScenario.proctorIntro',
-      autoAdvance: { afterMs: 2000, toNodeId: 'alert' },
+      autoAdvance: { afterMs: 2200, toNodeId: 'context' },
+    },
+
+    context: {
+      kind: 'context',
+      tagI18n: 'amlScenario.caseContext.tag',
+      contextI18n: 'amlScenario.caseContext.context',
+      whatYouSeeI18n: 'amlScenario.caseContext.whatYouSee',
+      whatYouHearI18n: 'amlScenario.caseContext.whatYouHear',
+      beginI18n: 'amlScenario.caseContext.begin',
+      choices: [
+        { id: 'begin', nextNodeId: 'alert', points: 0 },
+      ],
     },
 
     alert: {
@@ -140,6 +152,13 @@ export const amlSuspiciousTransactionScenario = {
           nextNodeId: 'endRelease',
           points: 0,
         },
+        {
+          id: 'tipOff',
+          actionI18n: 'amlScenario.actions.tipOff',
+          hintI18n: 'amlScenario.actions.tipOffHint',
+          nextNodeId: 'endTipOff',
+          points: -5,
+        },
       ],
     },
 
@@ -173,6 +192,17 @@ export const amlSuspiciousTransactionScenario = {
         codeI18n: 'amlScenario.screen.endRelease.code',
         titleI18n: 'amlScenario.screen.endRelease.title',
         bodyI18n: 'amlScenario.screen.endRelease.body',
+      },
+    },
+    endTipOff: {
+      kind: 'end',
+      result: 'fail',
+      feedbackI18n: 'amlScenario.proctorFeedback.tipOffFail',
+      screen: {
+        type: 'policy',
+        codeI18n: 'amlScenario.screen.endTipOff.code',
+        titleI18n: 'amlScenario.screen.endTipOff.title',
+        bodyI18n: 'amlScenario.screen.endTipOff.body',
       },
     },
   },

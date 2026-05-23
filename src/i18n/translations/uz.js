@@ -86,7 +86,22 @@ export const uz = {
     title: 'Shubhali tranzaksiya — naqd kirim',
     subtitle: 'AML reglamenti v2.4 §4.2 · CTR/SAR qarori',
     proctorIntro:
-      'Stol oldidasiz. Monitorga qarang — yangi ogohlantirish keladi.',
+      'Stol oldidasiz. Mijoz keladi — vaziyatni diqqat bilan oʻrganing.',
+    caseContext: {
+      tag: 'Vaziyat · Toshkent-1 filiali · 09:14',
+      context:
+        'Seshanba tongi, 09:14. Siz Toshkent-1 filialining navbatchi kassirisiz. Premium mijoz — Bekzod Karimov, 43 kun avval hisob ochgan — duffel sumka bilan keladi. Sumkada 100 ming soʻmlik bogʼlamlar bilan 187 mln soʻm naqd. Mijoz terlagan, eshikka qarab-qarab oladi va ovozi titrab gapiradi. KYC fayliga koʻra, hisob ochilganda u "biznes faoliyati yoʻq, faqat oylik uchun" deb yozdirgan. Manba hujjati yoʻq — kontrakt ham, daromad bayonnomasi ham. AML algoritmi risk skorini 74 (sariq) gacha koʻtardi, peer-median dan ancha yuqori velocity belgisi bilan.',
+      whatYouSee: [
+        'Kassada: 187 mln soʻm naqd · 100 ming soʻmlik bogʼlamlar, hisoblangan va lentalangan.',
+        'AML algoritm skori 74/100 (yuqori), velocity peer-median dan 2.1x yuqori.',
+        'KYC fayli: hisob 43 kun avval ochilgan · biznes daromad yozilmagan · oylik klasterga tegishli.',
+      ],
+      whatYouHear: [
+        '"Tezroq qabul qiling, men kontraktni ertaga olib kelaman."',
+        '"Men Premium—siz mendan hujjat soʻramasligingiz kerak."',
+      ],
+      begin: 'Tahlilni boshlash',
+    },
     proctorMicInstruction:
       'Mikrofonni bosing yoki ekrandagi tanlovni bosing.',
     notification: {
@@ -124,6 +139,8 @@ export const uz = {
       releaseHint: 'Mijoz mamnun · audit eshigi ochilgan',
       escalate: 'Compliance ga eskalatsiya',
       escalateHint: 'Menejer + Compliance birgalikda qaror',
+      tipOff: 'Mijozga ogohlantirish — "siz shubhalisiz"',
+      tipOffHint: 'JINOIY · AML §7.1 — mijozga SAR jarayoni aytilmaydi',
     },
     proctorFeedback: {
       correct:
@@ -168,6 +185,12 @@ export const uz = {
         body:
           '50 mln soʻmdan ortiq har qanday naqd kirim Currency Transaction Report va manba hujjatini talab qiladi. Hujjatsiz qabul qilish — bevosita buzilish va shaxsiy javobgarlik.',
       },
+      endTipOff: {
+        code: 'AML §7.1',
+        title: 'Tipping-off — jinoiy harakat',
+        body:
+          'Mijozga "siz shubhalisiz" yoki "biz SAR yozyapmiz" deyish — tipping-off. Bu AML §7.1 ostida jinoiy harakat hisoblanadi va xodimga 5 yilgacha jazo yuklaydi. Mijozga hech qachon SAR jarayoni haqida xabar berilmaydi.',
+      },
     },
     debrief: {
       title: 'Mashgʻulot natijasi',
@@ -186,7 +209,23 @@ export const uz = {
     title: 'Phishing email triage',
     subtitle: 'IB-301 · domen va havola tahlili',
     proctorIntro:
-      'Yangi xat keldi. Mijozning hisobini "bloklash" haqida. Diqqat bilan tekshiring.',
+      'IB konsoli oldidasiz. Yangi xat tushdi — vaziyatni diqqat bilan oʻrganing.',
+    caseContext: {
+      tag: 'Vaziyat · IB monitoring konsoli · 11:02 Juma',
+      context:
+        'Juma kuni 11:02, IB monitoring konsoli oldidasiz. Siz birinchi hafta navbatchi kichik SOC analitiksiz. Pochtaga "secure@bank-secure-uz.help" yuboruvchisidan xat keldi. Display name — "OOQ Bank Compliance" — rasmiy bankka oʻxshatib qoʻyilgan. WHOIS soʻrovi koʻrsatadi: domen 3 kun avval roʻyxatga olingan. Xat DMARC tekshiruvini "fail" bilan oʻtgan. Ilova — "invoice.exe", lekin PDF ikonkasi bilan niqoblangan. Havola HTTPS emas, oddiy HTTP. Mavzu: "Hisobingiz 30 daqiqada bloklanadi".',
+      whatYouSee: [
+        'Yuboruvchi domeni: bank-secure-uz.help · 3 kun avval roʻyxatga olingan (WHOIS).',
+        'Ilova: invoice.exe — PDF ikonkasi bilan niqoblangan (real fayl turi .exe).',
+        'Havola: http://bank-secure-uz.help/verify — HTTPS yoʻq, qisqartirilgan domen.',
+        'Email header: DMARC fail · SPF none · Reply-To boshqa domen.',
+      ],
+      whatYouHear: [
+        '«Hisobingiz 30 daqiqa ichida bloklanadi. Tasdiqlash uchun bosing.»',
+        '«Bu xat OOQ Bank Compliance dan rasmiy ogohlantirishdir.»',
+      ],
+      begin: 'Tahlilni boshlash',
+    },
     proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
     notification: {
       tag: 'Yangi SOC ogohlantirishi',
@@ -282,7 +321,23 @@ export const uz = {
     title: 'Mule hisob aniqlash',
     subtitle: 'FRAUD-204 · velocity anomalya',
     proctorIntro:
-      'Hisob 20214…7711 boʻyicha velocity anomalya. 11 kun avval ochilgan, oʻtkazmalar koʻp.',
+      'Fraud monitor konsoli oldidasiz. Tizim flagged hisob aniqladi — vaziyatni oʻrganing.',
+    caseContext: {
+      tag: 'Vaziyat · Fraud monitoring · 09:40 Chorshanba',
+      context:
+        'Chorshanba ertalab 09:40. Siz Toshkent-1 navbatchi fraud analitiksiz. Tizim hisob 20214…7711 ni flagged qildi. Hisob 11 kun avval ochilgan, egasi — Sherzod Yusupov, INN 30412840190008. Bugun 09:00 dan 09:32 gacha — 32 daqiqa ichida — 11 ta turli hisobdan 14 ta kirim oʻtkazma keldi, har biri 50-300 ming UZS. Hammasi darhol bitta tashqi xorijiy kartaga 1.8 mln UZS card top-up sifatida yuborildi. AI velocity skor 9.4x (peer-median dan 9.4 marta yuqori). Mijoz bilan suhbat yoʻq — tizim aniqlagan vaziyat.',
+      whatYouSee: [
+        'Kirim: 14 ta oʻtkazma · 50-300k UZS har biri · 11 ta turli yuboruvchi hisobdan · 32 daqiqa ichida.',
+        'Chiqim: 1.8 mln UZS · bitta xorijiy karta ga card top-up · darhol.',
+        'Hisob yoshi: 11 kun · egasi Sherzod Yusupov · INN 30412840190008.',
+        'AI velocity skor: 9.4x peer-median (chegara — 5x).',
+      ],
+      whatYouHear: [
+        'KYC suhbatidan (hisob ochilganda): «biznes faoliyatim yoʻq, hisob faqat oylik uchun».',
+        'AI ogohlantirish: «mule schemasi pattern aniqlandi — darhol koʻrib chiqing».',
+      ],
+      begin: 'Tahlilni boshlash',
+    },
     proctorMicInstruction: 'Mikrofonni bosing yoki tanlovni bosing.',
     notification: {
       tag: 'Fraud monitor ogohlantirishi',
@@ -470,6 +525,12 @@ export const uz = {
       ],
     },
   },
+  caseContext: {
+    tag: 'Vaziyat',
+    whatYouSee: 'Siz nimani koʻrasiz',
+    whatYouHear: 'Siz nimani eshitasiz',
+    begin: 'Tahlilni boshlash',
+  },
   hud: {
     listening: 'Tinglamoqda...',
     thinking: 'Tahlil qilmoqda...',
@@ -478,5 +539,9 @@ export const uz = {
     micHint: 'Bosing yoki bevosita tanlovni bosing',
     aiProctor: 'AI Proctor',
     client: 'Mijoz',
+    score: 'Baho',
+    xp: 'XP',
+    accuracy: 'Aniqlik',
+    progress: 'Bajarildi',
   },
 };
