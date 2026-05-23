@@ -331,21 +331,24 @@ function drawAnalysis(ctx, c, t) {
   ctx.fillStyle = PALETTE.cream;
   ctx.fillRect(0, 42, W, H - 42);
 
-  drawChip(ctx, 32, 64, 240, 40, PALETTE.mint, 'XAVFSIZLIK TAHLILI');
+  drawChip(ctx, 32, 64, 240, 40, PALETTE.mint, c.chip ?? 'AML ANALYSIS');
 
   ctx.fillStyle = PALETTE.ink;
   ctx.font = '900 24px Nunito, system-ui, sans-serif';
-  ctx.fillText('Aniqlangan belgilar', 32, 138);
+  ctx.fillText(c.title ?? '', 32, 138);
 
   const items = c.items ?? [];
-  const visible = Math.min(items.length, Math.floor(t * 1.4) % (items.length + 2) || items.length);
+  // Monotonic reveal: items pop in over the first ~3s and stay visible.
+  // The previous code modulated with `%` which oscillated 0→N→0→N
+  // forever — the user saw items "appearing multiple times". Bug fixed.
+  const elapsed = Math.max(0, t - (c.revealStart ?? 0));
   ctx.font = '600 16px Nunito, system-ui, sans-serif';
   items.forEach((item, i) => {
-    if (i >= visible && !c.allVisible) return;
+    const popIn = c.allVisible ? 1 : Math.min(1, Math.max(0, elapsed * 1.4 - i * 0.45));
+    if (popIn <= 0) return;
     const y = 180 + i * 64;
-    const popIn = Math.min(1, (t * 1.4 - i) * 1.5);
     ctx.save();
-    ctx.globalAlpha = c.allVisible ? 1 : Math.max(0.3, popIn);
+    ctx.globalAlpha = popIn;
     ctx.translate(0, (1 - popIn) * -10);
     ctx.fillStyle = PALETTE.mint;
     roundRect(ctx, 32, y - 28, W - 64, 50, 14);
@@ -620,16 +623,12 @@ function drawDashboard(ctx, c, t) {
 
   ctx.fillStyle = PALETTE.ink;
   ctx.font = '900 24px Nunito, system-ui, sans-serif';
-  ctx.fillText('Mijoz CRM · Toshkent-1', 32, 84);
+  ctx.fillText(c.title ?? '', 32, 84);
   ctx.font = '600 14px Nunito, system-ui, sans-serif';
   ctx.fillStyle = PALETTE.ink2;
-  ctx.fillText('Faol mijoz: ' + (c.client ?? 'Anonim mijoz'), 32, 108);
+  ctx.fillText(c.client ?? '', 32, 108);
 
-  const cards = c.cards ?? [
-    { label: 'Kutilayotgan', value: '3', tint: PALETTE.peach },
-    { label: 'Bugun xizmat', value: '17', tint: PALETTE.mint },
-    { label: 'NPS', value: '8.4', tint: PALETTE.sky },
-  ];
+  const cards = c.cards ?? [];
   const cardW = (W - 96) / cards.length;
   cards.forEach((card, i) => {
     const x = 32 + i * (cardW + 16);

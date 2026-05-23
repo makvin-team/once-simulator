@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { OfficeScene } from '../three/OfficeScene.js';
-import { t } from '../data/translations.js';
+import { useT } from '../i18n/index.js';
 
-const HOTSPOT_LABELS = {
-  client: t.hotspots.client,
-  computer: t.hotspots.computer,
-  folder: t.hotspots.folder,
-};
+/**
+ * Thin React wrapper around the imperative OfficeScene. Drives the
+ * scene's camera, screen, mood, and hotspot highlight from props, and
+ * forwards hotspot clicks back to the parent.
+ *
+ * Camera framing is controlled by the explicit `cameraView` prop (defaults
+ * to "overview"), not by `activeHotspot`. The scene used to dolly the
+ * camera into the computer whenever an alert popped — that hid the 3D
+ * client and the Medkit-quality bar required keeping the client in frame.
+ * Hotspots can still be highlighted independently of camera position.
+ */
 
-const VIEW_FOR_HOTSPOT = {
-  client: 'client',
-  computer: 'computer',
-  folder: 'folder',
-};
+const HOTSPOT_KEYS = ['client', 'computer', 'folder'];
 
 export function SceneCanvas({
   activeHotspot,
@@ -20,7 +22,10 @@ export function SceneCanvas({
   speaker,
   screenContent,
   clientMood,
+  cameraView = 'overview',
+  hideHotspots = false,
 }) {
+  const t = useT();
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const projectionsRef = useRef(null);
@@ -32,7 +37,7 @@ export function SceneCanvas({
   projectionsRef.current = setProjections;
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return undefined;
     const scene = new OfficeScene(containerRef.current, {
       onHotspotSelect: (key, target) => onHotspotSelectRef.current?.(key, target),
       onProjections: (p) => projectionsRef.current?.(p),
@@ -49,9 +54,12 @@ export function SceneCanvas({
   useEffect(() => {
     if (!ready) return;
     sceneRef.current?.highlight(activeHotspot);
-    const view = VIEW_FOR_HOTSPOT[activeHotspot] ?? 'overview';
-    sceneRef.current?.setView(view);
   }, [activeHotspot, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    sceneRef.current?.setView(cameraView ?? 'overview');
+  }, [cameraView, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -68,35 +76,45 @@ export function SceneCanvas({
     sceneRef.current?.setClientMood(clientMood ?? 'neutral');
   }, [clientMood, ready]);
 
+  const hotspotLabels = {
+    client: t.hud?.client ?? 'Client',
+    computer: t.hotspots?.computer ?? 'Monitor',
+    folder: t.hotspots?.folder ?? 'Folder',
+  };
+
   return (
     <div className="absolute inset-0">
       <div ref={containerRef} className="absolute inset-0" />
       {!ready && (
         <div className="absolute inset-0 flex items-center justify-center bg-cream text-ink text-sm">
-          {t.loadingScene}
+          {t.loadingScene ?? '…'}
         </div>
       )}
-      <Hotspots
-        projections={projections}
-        activeHotspot={activeHotspot}
-        onSelect={onHotspotSelect}
-      />
+      {!hideHotspots && (
+        <Hotspots
+          projections={projections}
+          activeHotspot={activeHotspot}
+          labels={hotspotLabels}
+          onSelect={onHotspotSelect}
+        />
+      )}
     </div>
   );
 }
 
-function Hotspots({ projections, activeHotspot, onSelect }) {
+function Hotspots({ projections, activeHotspot, labels, onSelect }) {
   return (
     <div className="pointer-events-none absolute inset-0">
       {projections.map((p) => {
         if (!p.visible) return null;
+        if (!HOTSPOT_KEYS.includes(p.key)) return null;
         const isActive = activeHotspot === p.key;
-        const label = HOTSPOT_LABELS[p.key] ?? p.key;
+        const label = labels[p.key] ?? p.key;
         return (
           <button
             key={p.key}
             type="button"
-            onClick={() => onSelect(p.key)}
+            onClick={() => onSelect?.(p.key)}
             className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2"
             style={{ left: `${p.x}px`, top: `${p.y}px` }}
             aria-label={label}

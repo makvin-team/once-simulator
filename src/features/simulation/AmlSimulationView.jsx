@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../../state/useAppStore.js';
 import { scenarios } from '../../data/scenarios/index.js';
@@ -29,15 +29,15 @@ import { LanguageSwitcher } from '../../components/hud/LanguageSwitcher.jsx';
 
 export function AmlSimulationView() {
   const t = useT();
+  const locale = useAppStore((s) => s.locale);
   const scenarioId = useAppStore((s) => s.scenarioId);
   const currentNodeId = useAppStore((s) => s.currentNodeId);
   const notificationVisible = useAppStore((s) => s.notificationVisible);
   const inspectorOpen = useAppStore((s) => s.inspectorOpen);
   const micActive = useAppStore((s) => s.micActive);
   const advance = useAppStore((s) => s.advance);
-  const openInspector = useAppStore((s) => s.openInspector);
-  const closeInspector = useAppStore((s) => s.closeInspector);
-  const dismissNotification = useAppStore((s) => s.dismissNotification);
+  const advanceTo = useAppStore((s) => s.advanceTo);
+  const reopenInspector = useAppStore((s) => s.reopenInspector);
   const pickChoice = useAppStore((s) => s.pickChoice);
   const setMicActive = useAppStore((s) => s.setMicActive);
   const exitToRoleSelection = useAppStore((s) => s.exitToRoleSelection);
@@ -77,20 +77,52 @@ export function AmlSimulationView() {
       ? 'speaking'
       : 'ready';
 
+  /**
+   * Hotspot click on the 3D computer.
+   *   - notification node: behave like the toast CTA, advance to the
+   *     node it links to (typically the inspect node).
+   *   - inspect node with the panel closed (shouldn't happen in the new
+   *     flow but kept as a safety net): reopen the panel.
+   *   - any other node: no-op.
+   */
   const handleHotspotSelect = useCallback(
     (key) => {
-      if (key === 'computer' && node?.kind === 'notification' && notificationVisible) {
-        openInspector();
+      if (key !== 'computer') return;
+      if (node?.kind === 'notification') {
+        const next = node.choices?.[0]?.nextNodeId;
+        if (next) advanceTo(next);
+        return;
+      }
+      if (node?.kind === 'inspect' && !inspectorOpen) {
+        reopenInspector();
       }
     },
-    [node, notificationVisible, openInspector],
+    [node, inspectorOpen, advanceTo, reopenInspector],
   );
 
+  /**
+   * Notification CTA. Advances `currentNodeId` to the link target on the
+   * alert node's first choice (typically the inspect node). This is the
+   * fix for the "missing options" bug — the previous code only flipped a
+   * boolean and left the node graph behind.
+   */
+  const handleNotificationCta = useCallback(() => {
+    if (node?.kind !== 'notification') return;
+    const next = node.choices?.[0]?.nextNodeId;
+    if (next) advanceTo(next);
+  }, [node, advanceTo]);
+
+  /**
+   * Screen-content resolver. Depends on `locale` so a language switch
+   * recomputes the payload and the canvas texture redraws with the
+   * translated copy. Locale-aware string lookups are done lazily on
+   * the underlying `screen` object (string i18n paths are resolved here).
+   */
   const screenContent = useMemo(() => {
-    if (!node) return scenario?.defaultScreen ?? { type: 'idle' };
-    if (node.screen) return node.screen;
-    return scenario?.defaultScreen ?? { type: 'idle' };
-  }, [node, scenario]);
+    const raw = node?.screen ?? scenario?.defaultScreen ?? { type: 'idle' };
+    return resolveScreenContent(raw, t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [node, scenario, locale]);
 
   if (!scenario || !node) {
     return (
@@ -120,6 +152,8 @@ export function AmlSimulationView() {
         speaker={null}
         screenContent={screenContent}
         clientMood="neutral"
+        cameraView="overview"
+        hideHotspots={inspectorOpen}
       />
 
       <TopBar
@@ -128,7 +162,9 @@ export function AmlSimulationView() {
         onExit={exitToRoleSelection}
       />
 
-      <ProctorPanel status={proctorStatus} subtitle={proctorSubtitle} />
+      {!inspectorOpen && (
+        <ProctorPanel status={proctorStatus} subtitle={proctorSubtitle} />
+      )}
 
       <ClientHologramCard
         nameI18n="amlScenario.txPanel.client"
@@ -137,21 +173,19 @@ export function AmlSimulationView() {
       />
 
       <NotificationToast
-        visible={notificationVisible && !inspectorOpen}
+        visible={notificationVisible && !inspectorOpen && node.kind === 'notification'}
         tagI18nKey={node.tagI18n}
         titleI18nKey={node.titleI18n}
         subtitleI18nKey={node.subtitleI18n}
         metaI18nKey={node.metaI18n}
         ctaI18nKey={node.ctaI18n}
         severity={node.severity}
-        onCta={openInspector}
-        onDismiss={dismissNotification}
+        onCta={handleNotificationCta}
       />
 
       <TransactionDetailsPanel
         node={node.kind === 'inspect' ? node : null}
         visible={inspectorOpen && node.kind === 'inspect'}
-        onClose={closeInspector}
         onChoose={pickChoice}
       />
 
@@ -275,4 +309,40 @@ function readPath(obj, path) {
   return path
     .split('.')
     .reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : null), obj);
+}
+
+/**
+ * Walk a `screen` payload from the scenario and resolve any i18n key
+ * references to their live translations. Recognised key suffixes are
+ * `I18n` (e.g. `titleI18n`, `clientI18n`); the resolved value is placed
+ * under the de-suffixed key. Arrays are mapped element-by-element so a
+ * card or item list can be authored entirely from translations.
+ *
+ * Plain (non-key-suffixed) properties are passed through untouched.
+ * This means existing scenarios can opt in to i18n field-by-field
+ * without a wholesale rewrite.
+ */
+function resolveScreenContent(raw, t) {
+  if (!raw || typeof raw !== 'object') return raw;
+  const out = { type: raw.type };
+  for (const [key, value] of Object.entries(raw)) {
+    if (key === 'type') continue;
+    if (key.endsWith('I18n') && typeof value === 'string') {
+      const targetKey = key.slice(0, -4);
+      out[targetKey] = readPath(t, value) ?? value;
+      continue;
+    }
+    if (Array.isArray(value)) {
+      out[key] = value.map((entry) =>
+        typeof entry === 'object' ? resolveScreenContent(entry, t) : entry,
+      );
+      continue;
+    }
+    if (value && typeof value === 'object') {
+      out[key] = resolveScreenContent(value, t);
+      continue;
+    }
+    out[key] = value;
+  }
+  return out;
 }

@@ -115,6 +115,7 @@ export const uz = {
       ],
       yourTask: 'Sizning qaroringiz',
       taskHint: 'Bitta toʻgʻri javobni tanlang — qaror saqlanadi va baholanadi.',
+      timelineLabel: 'Voqealar tartibi',
     },
     actions: {
       fileSar: 'SAR yozish',
@@ -133,6 +134,40 @@ export const uz = {
         'XATAR. Hujjatsiz 187 mln naqd qabul qilish — AML v2.4 §4.2 ning toʻgʻridan-toʻgʻri buzilishi. Audit shaxsiy javobgarlik yuklaydi.',
       tipOffFail:
         'JINOIY HARAKAT. Mijozga "shubhalisiz" deyish — tipping-off (AML §7.1). Hech qachon mijozga SAR jarayonini bildirmang.',
+    },
+    screen: {
+      dashboard: {
+        title: 'Mijoz CRM · Toshkent-1',
+        client: 'Bekzod Karimov · INN 30312840290052',
+        cards: {
+          account: 'Faol hisob',
+          risk: 'Risk skor',
+          limit: 'Limit',
+        },
+      },
+      analysis: {
+        title: 'Aniqlangan red-flag belgilari',
+        items: [
+          'Hisob 20208…0419 · 187 mln soʻm',
+          'Manba hujjati yoʻq',
+          'Risk skor 74 (yuqori)',
+          'Mijoz: yangi · 43 kun',
+        ],
+      },
+      endCorrect: {
+        title: 'SAR yuborildi',
+        subtitle: 'AML v2.4 §4.2 · Compliance 24 soat ichida koʻradi',
+      },
+      endEscalate: {
+        title: 'Compliance ga eskalatsiya qilindi',
+        subtitle: 'Birgalikdagi koʻrib chiqish jarayonda',
+      },
+      endRelease: {
+        code: 'AML v2.4 §4.2',
+        title: 'Majburiy CTR chegarasi',
+        body:
+          '50 mln soʻmdan ortiq har qanday naqd kirim Currency Transaction Report va manba hujjatini talab qiladi. Hujjatsiz qabul qilish — bevosita buzilish va shaxsiy javobgarlik.',
+      },
     },
     debrief: {
       title: 'Mashgʻulot natijasi',

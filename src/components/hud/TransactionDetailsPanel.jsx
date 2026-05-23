@@ -4,7 +4,15 @@ import { RiskIndicatorStrip } from './RiskIndicatorStrip.jsx';
 import { ActionButton } from './ActionButton.jsx';
 import { useT } from '../../i18n/index.js';
 
-export function TransactionDetailsPanel({ node, visible, onClose, onChoose }) {
+/**
+ * Inspect-node panel. Anchored to the right so the 3D office (and the
+ * client) remain visible on the left. The panel intentionally has no
+ * close affordance — the only way out is choosing an action, which
+ * advances the scenario. Closing it without a decision would strand the
+ * player on a node with no UI.
+ */
+
+export function TransactionDetailsPanel({ node, visible, onChoose }) {
   const t = useT();
   if (!node) return null;
 
@@ -19,31 +27,27 @@ export function TransactionDetailsPanel({ node, visible, onClose, onChoose }) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) onClose?.();
-          }}
+          initial={{ x: 32, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 32, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 320, damping: 28 }}
           style={{
             position: 'absolute',
-            inset: 0,
-            background: 'rgba(43, 30, 22, 0.42)',
-            backdropFilter: 'blur(3px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            top: 80,
+            right: 16,
+            bottom: 96,
+            width: 'min(480px, calc(100vw - 32px))',
             zIndex: 45,
-            padding: 24,
+            overflowY: 'auto',
+            scrollbarWidth: 'thin',
           }}
         >
           <motion.div
-            initial={{ scale: 0.85, y: 12, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.96, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-            style={{ width: 'min(720px, 100%)' }}
+            style={{ width: '100%' }}
           >
             <HudPanel tone="paper" pad="lg" shadow="plush">
               {/* HEAD */}
@@ -97,15 +101,6 @@ export function TransactionDetailsPanel({ node, visible, onClose, onChoose }) {
                     </div>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="btn-plush ghost"
-                  style={{ fontSize: 12, padding: '8px 14px' }}
-                  aria-label={t.nav.exit}
-                >
-                  ✕
-                </button>
               </div>
 
               {/* INDICATORS */}
@@ -133,7 +128,7 @@ export function TransactionDetailsPanel({ node, visible, onClose, onChoose }) {
                       marginBottom: 8,
                     }}
                   >
-                    timeline
+                    {t.amlScenario?.txPanel?.timelineLabel ?? 'Timeline'}
                   </div>
                   <ol
                     style={{

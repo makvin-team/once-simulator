@@ -99,8 +99,50 @@ export const useAppStore = create((set, get) => ({
   openNotification: () => set({ notificationVisible: true }),
   dismissNotification: () => set({ notificationVisible: false }),
 
-  openInspector: () => set({ inspectorOpen: true, notificationVisible: false }),
-  closeInspector: () => set({ inspectorOpen: false }),
+  /**
+   * Advance directly to a named node, applying the same kind-aware side
+   * effects as `advance`. Used by the NotificationToast CTA so the click
+   * actually moves the graph forward instead of just toggling a panel.
+   */
+  advanceTo: (nodeId) => {
+    const { scenarioId } = get();
+    const scenario = scenarios[scenarioId];
+    const node = scenario?.nodes?.[nodeId];
+    if (!node) return;
+    if (node.kind === 'notification') {
+      set({
+        currentNodeId: nodeId,
+        notificationVisible: true,
+        inspectorOpen: false,
+      });
+      return;
+    }
+    if (node.kind === 'inspect') {
+      set({
+        currentNodeId: nodeId,
+        inspectorOpen: true,
+        notificationVisible: false,
+      });
+      return;
+    }
+    set({
+      currentNodeId: nodeId,
+      notificationVisible: false,
+      inspectorOpen: false,
+    });
+  },
+
+  /**
+   * Re-open the inspector. Only valid while the current node is of
+   * kind=inspect; on any other node this is a no-op so we don't strand
+   * the player in an empty modal.
+   */
+  reopenInspector: () => {
+    const { scenarioId, currentNodeId } = get();
+    const node = scenarios[scenarioId]?.nodes?.[currentNodeId];
+    if (node?.kind !== 'inspect') return;
+    set({ inspectorOpen: true, notificationVisible: false });
+  },
 
   setMicActive: (value) => set({ micActive: !!value }),
 

@@ -15,7 +15,6 @@ export function NotificationToast({
   ctaI18nKey,
   severity = 'high',
   onCta,
-  onDismiss,
 }) {
   const t = useT();
   const [progress, setProgress] = useState(1);
@@ -149,16 +148,9 @@ export function NotificationToast({
                     onClick={onCta}
                     className="btn-plush primary"
                     style={{ fontSize: 13, padding: '10px 18px' }}
+                    autoFocus
                   >
                     {readPath(t, ctaI18nKey) ?? 'Open'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onDismiss}
-                    className="btn-plush ghost"
-                    style={{ fontSize: 13, padding: '10px 18px' }}
-                  >
-                    {t.nav.back}
                   </button>
                 </div>
               </div>

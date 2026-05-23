@@ -33,16 +33,17 @@ export const amlSuspiciousTransactionScenario = {
   scenarioSubtitleI18n: 'amlScenario.subtitle',
 
   /**
-   * Initial monitor content. `ScreenRenderer` already supports the `dashboard`
-   * variant — we feed it the CRM view that matches the alert.
+   * Initial monitor content. Strings flow through the i18n resolver so
+   * the canvas texture redraws on a language switch.
    */
   defaultScreen: {
     type: 'dashboard',
-    client: 'Bekzod Karimov · INN 30312840290052',
+    titleI18n: 'amlScenario.screen.dashboard.title',
+    clientI18n: 'amlScenario.screen.dashboard.client',
     cards: [
-      { label: 'Faol mijoz', value: '20208…0419', tint: '#A6D8FF' },
-      { label: 'Risk skor', value: '74', tint: '#FFB68A' },
-      { label: 'Limit', value: '50M', tint: '#FFD86B' },
+      { labelI18n: 'amlScenario.screen.dashboard.cards.account', value: '20208…0419', tint: '#A6D8FF' },
+      { labelI18n: 'amlScenario.screen.dashboard.cards.risk', value: '74', tint: '#FFB68A' },
+      { labelI18n: 'amlScenario.screen.dashboard.cards.limit', value: '50M', tint: '#FFD86B' },
     ],
   },
 
@@ -64,12 +65,9 @@ export const amlSuspiciousTransactionScenario = {
       severity: 'high',
       screen: {
         type: 'analysis',
-        items: [
-          'Hisob 20208…0419 · 187 mln soʻm',
-          'Manba hujjati yoʻq',
-          'Risk skor 74 (yuqori)',
-          'Mijoz: yangi · 43 kun',
-        ],
+        titleI18n: 'amlScenario.screen.analysis.title',
+        itemsI18n: 'amlScenario.screen.analysis.items',
+        allVisible: true,
       },
       choices: [
         {
@@ -154,8 +152,8 @@ export const amlSuspiciousTransactionScenario = {
       feedbackI18n: 'amlScenario.proctorFeedback.correct',
       screen: {
         type: 'forwarded',
-        title: 'SAR submitted',
-        subtitle: 'AML v2.4 §4.2 · Compliance review 24h',
+        titleI18n: 'amlScenario.screen.endCorrect.title',
+        subtitleI18n: 'amlScenario.screen.endCorrect.subtitle',
         flash: true,
       },
     },
@@ -165,8 +163,8 @@ export const amlSuspiciousTransactionScenario = {
       feedbackI18n: 'amlScenario.proctorFeedback.escalateOk',
       screen: {
         type: 'forwarded',
-        title: 'Escalated to Compliance',
-        subtitle: 'Joint review in progress',
+        titleI18n: 'amlScenario.screen.endEscalate.title',
+        subtitleI18n: 'amlScenario.screen.endEscalate.subtitle',
       },
     },
     endRelease: {
@@ -175,10 +173,9 @@ export const amlSuspiciousTransactionScenario = {
       feedbackI18n: 'amlScenario.proctorFeedback.releaseFail',
       screen: {
         type: 'policy',
-        code: 'AML v2.4 §4.2',
-        title: 'Mandatory CTR threshold',
-        body:
-          'Any cash deposit above 50M UZS requires a Currency Transaction Report and source-of-funds documentation. Accepting without docs is a direct breach with personal liability.',
+        codeI18n: 'amlScenario.screen.endRelease.code',
+        titleI18n: 'amlScenario.screen.endRelease.title',
+        bodyI18n: 'amlScenario.screen.endRelease.body',
       },
     },
   },
