@@ -8,6 +8,19 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --no-audit --no-fund
 
+# Build-time secret: Gemini TTS API key for the case-context narration.
+# Passed via `docker build --build-arg VITE_GEMINI_API_KEY=...`.
+# Defaults to empty so the build still succeeds without it (the speaker
+# button just stays hidden in the resulting bundle).
+#
+# WARNING: this value is baked into the JS bundle and is readable to
+# anyone who opens devtools on the deployed app. Restrict the key by
+# HTTP referrer in Google Cloud, or move the call behind a serverless
+# proxy. ARG scope is this stage only — the value does NOT appear in
+# the final nginx image's `docker history`.
+ARG VITE_GEMINI_API_KEY="AIzaSyC2boLhLMpTYeSuyFWxLwCdgj_8HqHxDbM"
+ENV VITE_GEMINI_API_KEY=$VITE_GEMINI_API_KEY
+
 # Copy the rest of the source and build
 COPY . .
 RUN npm run build

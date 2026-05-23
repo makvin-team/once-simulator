@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useT } from '../../i18n/index.js';
+import { useAppStore } from '../../state/useAppStore.js';
+import { useGeminiSpeak } from '../../hooks/useGeminiSpeak.js';
 
 /**
  * Center-stage card that frames a scenario with realistic context BEFORE
@@ -28,6 +31,24 @@ export function CaseContextCard({
   onBegin,
 }) {
   const t = useT();
+  const locale = useAppStore((s) => s.locale);
+  const { say, stop, isLoading, isSpeaking, supported } = useGeminiSpeak();
+
+  // Auto-narrate the case context when the card opens and whenever the
+  // text changes (e.g. locale switch). stop() runs on cleanup so leaving
+  // the card or hopping languages never leaves orphan audio.
+  useEffect(() => {
+    if (!supported || !contextText) return undefined;
+    say(contextText, locale);
+    return () => stop();
+  }, [contextText, locale, supported, say, stop]);
+
+  const isAudioActive = isLoading || isSpeaking;
+  const onToggleSpeak = () => {
+    if (isAudioActive) stop();
+    else say(contextText, locale);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -63,20 +84,36 @@ export function CaseContextCard({
       >
         <div
           style={{
-            display: 'inline-block',
-            fontSize: 11,
-            fontWeight: 900,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--ink)',
-            background: 'var(--peach)',
-            border: '2px solid var(--line)',
-            padding: '3px 9px',
-            borderRadius: 999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 10,
             marginBottom: 14,
           }}
         >
-          {caseTagLabel ?? t.caseContext?.tag ?? 'Case'}
+          <div
+            style={{
+              display: 'inline-block',
+              fontSize: 11,
+              fontWeight: 900,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: 'var(--ink)',
+              background: 'var(--peach)',
+              border: '2px solid var(--line)',
+              padding: '3px 9px',
+              borderRadius: 999,
+            }}
+          >
+            {caseTagLabel ?? t.caseContext?.tag ?? 'Case'}
+          </div>
+          {supported && (
+            <SpeakerButton
+              active={isAudioActive}
+              loading={isLoading}
+              onClick={onToggleSpeak}
+            />
+          )}
         </div>
 
         <p
@@ -120,6 +157,37 @@ export function CaseContextCard({
         </div>
       </motion.div>
     </motion.div>
+  );
+}
+
+function SpeakerButton({ active, loading, onClick }) {
+  const label = loading ? '...' : active ? '◼' : '▶';
+  const title = loading ? 'Loading audio' : active ? 'Stop narration' : 'Play narration';
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={title}
+      aria-label={title}
+      style={{
+        width: 36,
+        height: 36,
+        borderRadius: 999,
+        border: '2px solid var(--line)',
+        background: active ? 'var(--sky)' : 'white',
+        boxShadow: 'var(--plush-tiny)',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        fontSize: 13,
+        fontWeight: 900,
+        color: 'var(--ink)',
+        padding: 0,
+      }}
+    >
+      <span aria-hidden="true">{label}</span>
+    </button>
   );
 }
 

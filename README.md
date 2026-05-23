@@ -16,6 +16,28 @@ npm run build      # production bundle
 npm run preview    # preview the build
 ```
 
+## Configuration
+
+| Variable                | Required | Purpose                                                              |
+| ----------------------- | -------- | -------------------------------------------------------------------- |
+| `VITE_GEMINI_API_KEY`   | No       | Enables Gemini text-to-speech narration of case-context paragraphs.  |
+
+Create `.env.local` (already gitignored) at the repo root:
+
+```bash
+VITE_GEMINI_API_KEY=your-key-here
+```
+
+Without the key, the speaker button hides and the app runs normally.
+
+For Docker builds, pass the key as a build arg:
+
+```bash
+docker build --build-arg VITE_GEMINI_API_KEY=your-key-here -t ai-mentor .
+```
+
+**Security note.** The key is read at build time and ships in the JS bundle, so it is readable to anyone who opens devtools on a deployed build. Before deploying publicly, either restrict the key by HTTP referrer in the Google Cloud console or move the call behind a serverless proxy. See `plans/gemini-tts.md`.
+
 ## Architecture
 
 ```
