@@ -8,8 +8,21 @@ const TONE = {
   sky: { bg: 'var(--sky)', icon: '◯' },
 };
 
-export function RiskIndicatorStrip({ indicators = [] }) {
+/**
+ * Renders the 3-4 risk chips at the top of the inspect panel.
+ *
+ * `i18nRoot` is the dot-path to the active scenario's i18n root
+ * (e.g. "amlScenario", "scenarios.cyberZeroTrust"). Each indicator's
+ * label/unit/hint are looked up under
+ *   {i18nRoot}.txPanel.indicators.{id}
+ * so the same component works for every scenario without a hardcoded
+ * tree name.
+ */
+export function RiskIndicatorStrip({ indicators = [], i18nRoot }) {
   const t = useT();
+  const lookupBase = i18nRoot
+    ? readPath(t, `${i18nRoot}.txPanel.indicators`)
+    : null;
   return (
     <div
       style={{
@@ -19,7 +32,7 @@ export function RiskIndicatorStrip({ indicators = [] }) {
       }}
     >
       {indicators.map((ind) => {
-        const meta = t.amlScenario?.txPanel?.indicators?.[ind.id] ?? {};
+        const meta = lookupBase?.[ind.id] ?? {};
         const tone = TONE[ind.tone] ?? TONE.butter;
         const valueText =
           ind.value !== undefined

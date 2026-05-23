@@ -104,7 +104,10 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
               </div>
 
               {/* INDICATORS */}
-              <RiskIndicatorStrip indicators={node.indicators ?? []} />
+              <RiskIndicatorStrip
+                indicators={node.indicators ?? []}
+                i18nRoot={node.i18nRoot}
+              />
 
               {/* TIMELINE */}
               {Array.isArray(timeline) && timeline.length > 0 && (

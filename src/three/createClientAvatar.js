@@ -296,6 +296,7 @@ export function createClientAvatar(scene) {
   // ──────── Animation handles ────────
   group.userData.hips = hips;
   group.userData.head = headGroup;
+  group.userData.headBase = headGroup.position.clone(); // anchor for the bob
   group.userData.mouth = mouth;
   group.userData.eyelids = [lidL, lidR];
   group.userData.brows = [browL, browR];
@@ -396,8 +397,17 @@ export function updateClient(client, dt, elapsed, { speakingFor } = {}) {
       glanceX + Math.sin(elapsed * 0.6) * (0.03 + amp * 0.06);
     head.rotation.x =
       Math.sin(elapsed * 1.1) * (0.015 + amp * 0.03) + amp * 0.1;
-    head.position.y = Math.sin(elapsed * 1.6) * 0.004;
-    head.position.z = amp * 0.05;
+    // Bob and lean RELATIVE to the head's resting position — the
+    // earlier version wrote `position.y = sin(...)` which clobbered
+    // the 0.72 anchor and dropped the head down to the hips.
+    const base = client.userData.headBase;
+    if (base) {
+      head.position.set(
+        base.x,
+        base.y + Math.sin(elapsed * 1.6) * 0.004,
+        base.z + amp * 0.05,
+      );
+    }
   }
 
   if (mouth) {

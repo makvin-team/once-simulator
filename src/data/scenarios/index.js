@@ -12,16 +12,50 @@ import { cyberPhishingTriageScenario } from './cyberPhishingTriage.js';
 import { fraudMuleAccountScenario } from './fraudMuleAccount.js';
 import { cxAddressChangeScenario } from './cxAddressChange.js';
 
+// m2-m5 across all pillars — generated via _makeScenario.js
+import { amlBeneficialOwnerScenario } from './amlBeneficialOwner.js';
+import { amlSanctionsScenario } from './amlSanctions.js';
+import { amlPepScenario } from './amlPep.js';
+import { amlSarWritingScenario } from './amlSarWriting.js';
+import { cyberSocTriageScenario } from './cyberSocTriage.js';
+import { cyberIncidentResponseScenario } from './cyberIncidentResponse.js';
+import { cyberZeroTrustScenario } from './cyberZeroTrust.js';
+import { cyberDeepfakeScenario } from './cyberDeepfake.js';
+import { fraudSyntheticScenario } from './fraudSynthetic.js';
+import { fraudSkimmingScenario } from './fraudSkimming.js';
+import { fraudChargebackScenario } from './fraudChargeback.js';
+import { fraudAnomalyTuningScenario } from './fraudAnomalyTuning.js';
+import { cxAccountBlockScenario } from './cxAccountBlock.js';
+import { cxAccessibilityScenario } from './cxAccessibility.js';
+import { cxInternalEscalationScenario } from './cxInternalEscalation.js';
+import { cxComplexCustomerScenario } from './cxComplexCustomer.js';
+
 export const scenarios = {
   amlSuspiciousTransaction: amlSuspiciousTransactionScenario,
+  amlBeneficialOwner: amlBeneficialOwnerScenario,
+  amlSanctions: amlSanctionsScenario,
+  amlPep: amlPepScenario,
+  amlSarWriting: amlSarWritingScenario,
   cyberPhishingTriage: cyberPhishingTriageScenario,
+  cyberSocTriage: cyberSocTriageScenario,
+  cyberIncidentResponse: cyberIncidentResponseScenario,
+  cyberZeroTrust: cyberZeroTrustScenario,
+  cyberDeepfake: cyberDeepfakeScenario,
   fraudMuleAccount: fraudMuleAccountScenario,
+  fraudSynthetic: fraudSyntheticScenario,
+  fraudSkimming: fraudSkimmingScenario,
+  fraudChargeback: fraudChargebackScenario,
+  fraudAnomalyTuning: fraudAnomalyTuningScenario,
   cxAddressChange: cxAddressChangeScenario,
+  cxAccountBlock: cxAccountBlockScenario,
+  cxAccessibility: cxAccessibilityScenario,
+  cxInternalEscalation: cxInternalEscalationScenario,
+  cxComplexCustomer: cxComplexCustomerScenario,
 };
 
 export const scenarioOrder = [
-  'amlSuspiciousTransaction',
-  'cyberPhishingTriage',
-  'fraudMuleAccount',
-  'cxAddressChange',
+  'amlSuspiciousTransaction', 'amlBeneficialOwner', 'amlSanctions', 'amlPep', 'amlSarWriting',
+  'cyberPhishingTriage', 'cyberSocTriage', 'cyberIncidentResponse', 'cyberZeroTrust', 'cyberDeepfake',
+  'fraudMuleAccount', 'fraudSynthetic', 'fraudSkimming', 'fraudChargeback', 'fraudAnomalyTuning',
+  'cxAddressChange', 'cxAccountBlock', 'cxAccessibility', 'cxInternalEscalation', 'cxComplexCustomer',
 ];
