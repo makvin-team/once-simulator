@@ -40,7 +40,24 @@ export function setupLighting(scene) {
   deskLamp.position.set(0.9, 1.15, -0.7);
   scene.add(deskLamp);
 
-  return { ambient, hemi, ceilingLight, windowKey, peachAccent, mintAccent, moodLight, deskLamp };
+  // Soft fill on the client's face — kills the under-lighting at the
+  // overview camera angle so the avatar reads as a person, not a
+  // shadowed silhouette.
+  const clientFill = new THREE.PointLight(0xfff6e6, 0.55, 4, 1.5);
+  clientFill.position.set(0.0, 2.4, -1.4);
+  scene.add(clientFill);
+
+  return {
+    ambient,
+    hemi,
+    ceilingLight,
+    windowKey,
+    peachAccent,
+    mintAccent,
+    moodLight,
+    deskLamp,
+    clientFill,
+  };
 }
 
 const MOOD_COLORS = {

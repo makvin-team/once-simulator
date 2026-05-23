@@ -9,8 +9,15 @@ import { createProps } from './createProps.js';
 import { createDustField } from './createDustField.js';
 import { HotspotInteraction } from './interaction.js';
 
+/**
+ * Camera framings. `overview` is the only one used in the new
+ * Medkit-quality flow — it frames the client (z=-2.4, head ≈ y=1.77)
+ * in the upper third with the desk and monitor visible in the lower
+ * third. The other framings are kept for backwards compatibility but
+ * are no longer dispatched by the simulation view.
+ */
 const CAMERA_VIEWS = {
-  overview: { pos: [0, 1.55, 1.6], look: [0, 1.4, -2] },
+  overview: { pos: [0, 1.55, 1.45], look: [0, 1.55, -2.1] },
   client: { pos: [0.0, 1.55, -0.4], look: [0, 1.72, -2.6] },
   computer: { pos: [-0.15, 1.45, -0.35], look: [-0.6, 1.55, -1.15] },
   folder: { pos: [0.55, 1.35, -0.35], look: [0.7, 0.88, -1.05] },

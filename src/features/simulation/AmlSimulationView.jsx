@@ -159,6 +159,10 @@ export function AmlSimulationView() {
       <TopBar
         title={readPath(t, scenario.scenarioTitleI18n) ?? scenario.id}
         subtitle={readPath(t, scenario.scenarioSubtitleI18n) ?? ''}
+        pillarLabel={
+          readPath(t, `pillars.${scenario.pillarId}.shortLabel`) ?? scenario.pillarId
+        }
+        pillarTone={resolvePillarTone(scenario.pillarId)}
         onExit={exitToRoleSelection}
       />
 
@@ -213,7 +217,22 @@ export function AmlSimulationView() {
   );
 }
 
-function TopBar({ title, subtitle, onExit }) {
+function resolvePillarTone(pillarId) {
+  switch (pillarId) {
+    case 'aml':
+      return 'var(--peach)';
+    case 'cyber':
+      return 'var(--sky)';
+    case 'fraud':
+      return 'var(--butter)';
+    case 'cx':
+      return 'var(--mint)';
+    default:
+      return 'var(--peach)';
+  }
+}
+
+function TopBar({ title, subtitle, pillarLabel, pillarTone, onExit }) {
   const t = useT();
   return (
     <div
@@ -256,13 +275,13 @@ function TopBar({ title, subtitle, onExit }) {
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             color: 'var(--ink)',
-            background: 'var(--peach)',
+            background: pillarTone,
             padding: '2px 8px',
             borderRadius: 999,
             border: '2px solid var(--line)',
           }}
         >
-          AML
+          {pillarLabel}
         </span>
         <div
           style={{
