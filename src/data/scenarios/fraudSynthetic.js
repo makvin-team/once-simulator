@@ -22,5 +22,4 @@ export const fraudSyntheticScenario = makeScenario({
   correctId: 'denyReport',
   partialId: 'enhancedKyc',
   failId: 'open',
-  choiceTones: { denyReport: 'mint', enhancedKyc: 'butter', open: 'rose' },
 });

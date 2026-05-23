@@ -22,5 +22,4 @@ export const amlBeneficialOwnerScenario = makeScenario({
   correctId: 'demandUbo',
   partialId: 'escalate',
   failId: 'openAnyway',
-  choiceTones: { demandUbo: 'mint', escalate: 'butter', openAnyway: 'rose' },
 });

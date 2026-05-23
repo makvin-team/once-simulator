@@ -22,5 +22,4 @@ export const amlPepScenario = makeScenario({
   correctId: 'eddApprove',
   partialId: 'standardKyc',
   failId: 'accept',
-  choiceTones: { eddApprove: 'mint', standardKyc: 'butter', accept: 'rose' },
 });

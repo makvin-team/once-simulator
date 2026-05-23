@@ -23,5 +23,4 @@ export const cxAccessibilityScenario = makeScenario({
   correctId: 'fullSession',
   partialId: 'standardTutorial',
   failId: 'redirect',
-  choiceTones: { fullSession: 'mint', standardTutorial: 'butter', redirect: 'rose' },
 });

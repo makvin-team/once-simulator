@@ -22,5 +22,4 @@ export const cyberIncidentResponseScenario = makeScenario({
   correctId: 'containEradicate',
   partialId: 'restoreBackup',
   failId: 'payRansom',
-  choiceTones: { containEradicate: 'mint', restoreBackup: 'butter', payRansom: 'rose' },
 });

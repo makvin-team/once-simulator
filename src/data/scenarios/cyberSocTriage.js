@@ -21,5 +21,4 @@ export const cyberSocTriageScenario = makeScenario({
   correctId: 'isolate',
   partialId: 'monitor',
   failId: 'closeFp',
-  choiceTones: { isolate: 'mint', monitor: 'butter', closeFp: 'rose' },
 });

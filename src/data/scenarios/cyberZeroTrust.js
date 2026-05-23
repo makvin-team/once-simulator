@@ -22,5 +22,4 @@ export const cyberZeroTrustScenario = makeScenario({
   correctId: 'jitAccess',
   partialId: 'vpnMonitor',
   failId: 'permanentGroup',
-  choiceTones: { jitAccess: 'mint', vpnMonitor: 'butter', permanentGroup: 'rose' },
 });

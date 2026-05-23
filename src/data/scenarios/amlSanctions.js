@@ -22,5 +22,4 @@ export const amlSanctionsScenario = makeScenario({
   correctId: 'blockReport',
   partialId: 'escalate',
   failId: 'release',
-  choiceTones: { blockReport: 'mint', escalate: 'butter', release: 'rose' },
 });

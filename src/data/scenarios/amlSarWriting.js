@@ -23,5 +23,4 @@ export const amlSarWritingScenario = makeScenario({
   correctId: 'factualFiveW',
   partialId: 'partialNarrative',
   failId: 'accusatory',
-  choiceTones: { factualFiveW: 'mint', partialNarrative: 'butter', accusatory: 'rose' },
 });

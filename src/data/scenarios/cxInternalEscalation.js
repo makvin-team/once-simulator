@@ -23,5 +23,4 @@ export const cxInternalEscalationScenario = makeScenario({
   correctId: 'takeOverCoach',
   partialId: 'liveAdvise',
   failId: 'leaveAlone',
-  choiceTones: { takeOverCoach: 'mint', liveAdvise: 'butter', leaveAlone: 'rose' },
 });

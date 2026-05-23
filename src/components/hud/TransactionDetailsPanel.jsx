@@ -33,10 +33,10 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
           transition={{ type: 'spring', stiffness: 320, damping: 28 }}
           style={{
             position: 'absolute',
-            top: 80,
+            top: 72,
             right: 16,
             bottom: 96,
-            width: 'min(480px, calc(100vw - 32px))',
+            width: 'min(560px, calc(100vw - 32px))',
             zIndex: 45,
             overflowY: 'auto',
             scrollbarWidth: 'thin',
@@ -85,16 +85,16 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
                   </span>
                   <div>
                     <div
-                      style={{ fontSize: 20, fontWeight: 900, lineHeight: 1.1 }}
+                      style={{ fontSize: 22, fontWeight: 900, lineHeight: 1.1 }}
                     >
                       {clientName}
                     </div>
                     <div
                       style={{
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: 700,
                         color: 'var(--ink-2)',
-                        marginTop: 2,
+                        marginTop: 3,
                       }}
                     >
                       {clientMeta}
@@ -148,11 +148,12 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
                         key={i}
                         style={{
                           display: 'grid',
-                          gridTemplateColumns: '52px 1fr',
-                          gap: 10,
-                          fontSize: 12,
+                          gridTemplateColumns: '60px 1fr',
+                          gap: 12,
+                          fontSize: 13,
                           fontWeight: 700,
                           color: 'var(--ink)',
+                          lineHeight: 1.45,
                         }}
                       >
                         <span style={{ color: 'var(--ink-soft)', fontVariantNumeric: 'tabular-nums' }}>
@@ -188,10 +189,11 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
                 </div>
                 <div
                   style={{
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: 700,
                     color: 'var(--ink-2)',
-                    marginTop: 2,
+                    marginTop: 4,
+                    lineHeight: 1.45,
                   }}
                 >
                   {taskHint}
@@ -201,16 +203,19 @@ export function TransactionDetailsPanel({ node, visible, onChoose }) {
               <div
                 style={{
                   marginTop: 14,
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                  display: 'flex',
+                  flexDirection: 'column',
                   gap: 10,
                 }}
               >
                 {(node.choices ?? []).map((choice) => (
+                  // Deliberately NOT forwarding choice.tone / choice.isPrimary
+                  // — the scenario data still carries them for legacy reasons,
+                  // but visual encoding of "correct" answers turns the
+                  // training tool into a stoplight quiz. See the design note
+                  // at the top of ActionButton.jsx.
                   <ActionButton
                     key={choice.id}
-                    tone={choice.tone}
-                    isPrimary={choice.isPrimary}
                     label={readPath(t, choice.actionI18n) ?? choice.id}
                     hint={readPath(t, choice.hintI18n)}
                     onClick={() => onChoose?.(choice)}

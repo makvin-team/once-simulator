@@ -23,5 +23,4 @@ export const fraudAnomalyTuningScenario = makeScenario({
   correctId: 'tuneBacktest',
   partialId: 'partialBump',
   failId: 'disableRule',
-  choiceTones: { tuneBacktest: 'mint', partialBump: 'butter', disableRule: 'rose' },
 });

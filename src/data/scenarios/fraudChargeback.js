@@ -23,5 +23,4 @@ export const fraudChargebackScenario = makeScenario({
   correctId: 'defendEvidence',
   partialId: 'partialRefund',
   failId: 'acceptDispute',
-  choiceTones: { defendEvidence: 'mint', partialRefund: 'butter', acceptDispute: 'rose' },
 });

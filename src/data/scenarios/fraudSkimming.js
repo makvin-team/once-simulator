@@ -22,5 +22,4 @@ export const fraudSkimmingScenario = makeScenario({
   correctId: 'blockInvestigate',
   partialId: 'notifyCustomer',
   failId: 'monitor',
-  choiceTones: { blockInvestigate: 'mint', notifyCustomer: 'butter', monitor: 'rose' },
 });

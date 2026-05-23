@@ -22,5 +22,4 @@ export const cyberDeepfakeScenario = makeScenario({
   correctId: 'callback',
   partialId: 'emailConfirm',
   failId: 'wire',
-  choiceTones: { callback: 'mint', emailConfirm: 'butter', wire: 'rose' },
 });

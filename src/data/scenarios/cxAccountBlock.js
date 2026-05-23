@@ -23,5 +23,4 @@ export const cxAccountBlockScenario = makeScenario({
   correctId: 'empathyTemp',
   partialId: 'protocolOnly',
   failId: 'dismiss',
-  choiceTones: { empathyTemp: 'mint', protocolOnly: 'butter', dismiss: 'rose' },
 });

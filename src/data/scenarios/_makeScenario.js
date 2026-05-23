@@ -28,9 +28,12 @@
  *   correctId   — choice id that scores +10
  *   partialId   — choice id that scores +6
  *   failId      — choice id that scores 0
- *   choiceTones — { [choiceId]: 'mint' | 'butter' | 'rose' }
- *   screenCode  — short policy code shown on the fail screen
- *                 (e.g. 'AML §4.2', 'NIST 800-61', 'KYC §3.4')
+ *
+ * Note: earlier versions accepted a `choiceTones` map that colour-coded
+ * options (correct=mint, partial=butter, fail=rose) and an isPrimary
+ * pulse on the correct choice. Both were stripped because they
+ * telegraphed the answer through pure visual cues, defeating the
+ * point of a training tool. See the design note on ActionButton.jsx.
  */
 
 const KIND = {
@@ -50,7 +53,6 @@ export function makeScenario(opts) {
     correctId,
     partialId,
     failId,
-    choiceTones,
   } = opts;
 
   const root = `scenarios.${id}`;
@@ -126,8 +128,6 @@ export function makeScenario(opts) {
           id: cid,
           actionI18n: `${root}.actions.${cid}`,
           hintI18n: `${root}.actions.${cid}Hint`,
-          tone: choiceTones[cid] ?? defaultToneFor(i),
-          isPrimary: i === 0,
           nextNodeId: endIdFor(i),
           points: pointsFor(i),
         })),
@@ -181,8 +181,4 @@ function endIdFor(i) {
 
 function pointsFor(i) {
   return [10, 6, 0][i];
-}
-
-function defaultToneFor(i) {
-  return ['mint', 'butter', 'rose'][i];
 }

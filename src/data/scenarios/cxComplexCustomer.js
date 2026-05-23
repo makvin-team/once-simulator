@@ -24,5 +24,4 @@ export const cxComplexCustomerScenario = makeScenario({
   correctId: 'structuredTriage',
   partialId: 'partialCallback',
   failId: 'oneOnly',
-  choiceTones: { structuredTriage: 'mint', partialCallback: 'butter', oneOnly: 'rose' },
 });
