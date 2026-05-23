@@ -288,7 +288,7 @@ function Footnote() {
         alignItems: 'center',
       }}
     >
-      {['Shariah-compliant', 'UZ · RU · EN', 'Three.js · React', '4 pillars · 20 modules'].map(
+      {['4 pillars · 20 modules'].map(
         (label) => (
           <span
             key={label}
