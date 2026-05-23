@@ -48,9 +48,16 @@ const initialState = {
   maxScore: 0,
   decision: null,
 
+  // Session-scoped progress. Persists across scenarios within a session
+  // but is wiped on exitToRoleSelection. (Persisting across sessions is
+  // a follow-up — see plans/ux-overhaul.md.)
+  totalXp: 0,
+  correctAnswers: 0,
+  totalAnswers: 0,
+  completedScenarios: [],
+
   notificationVisible: false,
   inspectorOpen: false,
-  micActive: false,
 };
 
 export const useAppStore = create((set, get) => ({
@@ -92,7 +99,6 @@ export const useAppStore = create((set, get) => ({
       decision: null,
       notificationVisible: false,
       inspectorOpen: false,
-      micActive: false,
     });
   },
 
@@ -144,8 +150,6 @@ export const useAppStore = create((set, get) => ({
     set({ inspectorOpen: true, notificationVisible: false });
   },
 
-  setMicActive: (value) => set({ micActive: !!value }),
-
   advance: (nextNodeId) => {
     const { scenarioId } = get();
     const scenario = scenarios[scenarioId];
@@ -167,7 +171,18 @@ export const useAppStore = create((set, get) => ({
   },
 
   pickChoice: (choice) => {
-    const { scenarioId, currentNodeId, history, score, maxScore } = get();
+    const state = get();
+    const {
+      scenarioId,
+      currentNodeId,
+      history,
+      score,
+      maxScore,
+      totalXp,
+      correctAnswers,
+      totalAnswers,
+      completedScenarios,
+    } = state;
     const scenario = scenarios[scenarioId];
     const node = scenario?.nodes?.[currentNodeId];
     if (!scenario || !node || !choice) return;
@@ -186,7 +201,18 @@ export const useAppStore = create((set, get) => ({
 
     if (!nextNode) return;
 
+    // Session-scoped accuracy is whether the choice earned the maximum
+    // available for the node. A choice with points < bestPossible counts
+    // as a miss even if it earned partial credit.
+    const isCorrect = bestPossible > 0 && earned >= bestPossible;
+    const nextTotalXp = totalXp + Math.max(0, earned);
+    const nextTotalAnswers = totalAnswers + 1;
+    const nextCorrect = correctAnswers + (isCorrect ? 1 : 0);
+
     if (nextNode.kind === 'end') {
+      const nextCompleted = completedScenarios.includes(scenarioId)
+        ? completedScenarios
+        : [...completedScenarios, scenarioId];
       set({
         view: 'debrief',
         history: nextHistory,
@@ -196,6 +222,10 @@ export const useAppStore = create((set, get) => ({
         currentNodeId: choice.nextNodeId,
         inspectorOpen: false,
         notificationVisible: false,
+        totalXp: nextTotalXp,
+        correctAnswers: nextCorrect,
+        totalAnswers: nextTotalAnswers,
+        completedScenarios: nextCompleted,
       });
       return;
     }
@@ -207,6 +237,9 @@ export const useAppStore = create((set, get) => ({
       currentNodeId: choice.nextNodeId,
       inspectorOpen: nextNode.kind === 'inspect',
       notificationVisible: nextNode.kind === 'notification',
+      totalXp: nextTotalXp,
+      correctAnswers: nextCorrect,
+      totalAnswers: nextTotalAnswers,
     });
   },
 
@@ -223,7 +256,6 @@ export const useAppStore = create((set, get) => ({
       decision: null,
       notificationVisible: false,
       inspectorOpen: false,
-      micActive: false,
     });
   },
 

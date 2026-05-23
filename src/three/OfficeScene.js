@@ -17,7 +17,15 @@ import { HotspotInteraction } from './interaction.js';
  * are no longer dispatched by the simulation view.
  */
 const CAMERA_VIEWS = {
-  overview: { pos: [0, 1.55, 1.45], look: [0, 1.55, -2.1] },
+  // Default trainee-at-the-desk view. The trainee sits on the staff
+  // side of the desk; client visible across the desk as part of the
+  // scene, NOT as a face-zoom subject. Look target slightly lower so
+  // the desk + monitor + folder all sit naturally in frame.
+  overview: { pos: [0, 1.55, 1.45], look: [0, 1.45, -2.1] },
+  // Subtle lean-in for talking-head moments — still room-scale, no
+  // face zoom. Camera shifts ~60 cm forward and the look target rises
+  // ~10 cm so the client's upper body draws the eye.
+  deskFront: { pos: [0, 1.55, 0.85], look: [0, 1.55, -2.2] },
   client: { pos: [0.0, 1.55, -0.4], look: [0, 1.72, -2.6] },
   computer: { pos: [-0.15, 1.45, -0.35], look: [-0.6, 1.55, -1.15] },
   folder: { pos: [0.55, 1.35, -0.35], look: [0.7, 0.88, -1.05] },
@@ -196,7 +204,10 @@ export class OfficeScene {
     this.camera.position.x += sway * 0.02 + this.parallax.x;
     this.camera.lookAt(this.lookTarget);
 
-    updateClient(this.client, dt, t, { speakingFor: this.speakingFor });
+    updateClient(this.client, dt, t, {
+      speakingFor: this.speakingFor,
+      camera: this.camera,
+    });
     tickMoodLight(this.lights?.moodLight, dt);
 
     if (this.propsRoot) {

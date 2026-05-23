@@ -83,8 +83,7 @@ export function ActionButton({
             fontWeight: 700,
             color: 'var(--ink-2)',
             lineHeight: 1.4,
-          }}
-        >
+          }}>
           {hint}
         </span>
       )}

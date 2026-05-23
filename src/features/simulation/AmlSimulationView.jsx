@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { useAppStore } from '../../state/useAppStore.js';
 import { scenarios } from '../../data/scenarios/index.js';
 import { useT } from '../../i18n/index.js';
+import { useSpeak } from '../../hooks/useSpeak.js';
 import { SceneCanvas } from '../../components/SceneCanvas.jsx';
 import { ProctorPanel } from '../../components/hud/ProctorPanel.jsx';
 import { ClientHologramCard } from '../../components/hud/ClientHologramCard.jsx';
 import { NotificationToast } from '../../components/hud/NotificationToast.jsx';
 import { TransactionDetailsPanel } from '../../components/hud/TransactionDetailsPanel.jsx';
-import { MicPulse } from '../../components/hud/MicPulse.jsx';
 import { LanguageSwitcher } from '../../components/hud/LanguageSwitcher.jsx';
 
 /**
@@ -20,7 +20,8 @@ import { LanguageSwitcher } from '../../components/hud/LanguageSwitcher.jsx';
  *   3. <ClientHologramCard> — bottom-left 2D portrait of the client at the desk
  *   4. <NotificationToast> — the KEY popup (slides in on `alert` node)
  *   5. <TransactionDetailsPanel> — full-screen modal on `inspect` node
- *   6. <MicPulse> — bottom-center simulated mic
+ *   6. Browser TTS (window.speechSynthesis via useSpeak) reads each
+ *      node's text on entry; while speaking the avatar's mouth opens.
  *
  * Node flow is driven by `useAppStore`. The scenario data file
  * (`amlSuspiciousTransaction.js`) carries i18n keys for all copy so a
@@ -34,13 +35,12 @@ export function AmlSimulationView() {
   const currentNodeId = useAppStore((s) => s.currentNodeId);
   const notificationVisible = useAppStore((s) => s.notificationVisible);
   const inspectorOpen = useAppStore((s) => s.inspectorOpen);
-  const micActive = useAppStore((s) => s.micActive);
   const advance = useAppStore((s) => s.advance);
   const advanceTo = useAppStore((s) => s.advanceTo);
   const reopenInspector = useAppStore((s) => s.reopenInspector);
   const pickChoice = useAppStore((s) => s.pickChoice);
-  const setMicActive = useAppStore((s) => s.setMicActive);
   const exitToRoleSelection = useAppStore((s) => s.exitToRoleSelection);
+  const { say, stop, isSpeaking } = useSpeak();
 
   const scenario = scenarios[scenarioId];
   const node = scenario?.nodes?.[currentNodeId];
@@ -71,11 +71,42 @@ export function AmlSimulationView() {
     return '';
   }, [node, t]);
 
-  const proctorStatus = micActive
-    ? 'listening'
+  const proctorStatus = isSpeaking
+    ? 'speaking'
     : node?.kind === 'proctor'
-      ? 'speaking'
+      ? 'thinking'
       : 'ready';
+
+  // Build the spoken text per node. The assistant reads the proctor's
+  // instruction, the notification headline + subtitle, the inspector
+  // task brief, and end-state feedback. Choice buttons stay silent —
+  // the trainee should read those themselves to keep the loop snappy.
+  const spokenText = useMemo(() => {
+    if (!node) return '';
+    if (node.kind === 'proctor') return readPath(t, node.textI18n) ?? '';
+    if (node.kind === 'notification') {
+      const title = readPath(t, node.titleI18n) ?? '';
+      const subtitle = readPath(t, node.subtitleI18n) ?? '';
+      return [title, subtitle].filter(Boolean).join('. ');
+    }
+    if (node.kind === 'inspect') {
+      const tag = readPath(t, node.txTagI18n) ?? '';
+      const task = readPath(t, node.yourTaskI18n) ?? '';
+      const hint = readPath(t, node.taskHintI18n) ?? '';
+      return [tag, task, hint].filter(Boolean).join('. ');
+    }
+    if (node.kind === 'end') return readPath(t, node.feedbackI18n) ?? '';
+    return '';
+  }, [node, t]);
+
+  // Speak on every node entry and on every locale change. cancel() runs
+  // inside speak() so a mid-sentence language switch interrupts the old
+  // utterance and starts the new one.
+  useEffect(() => {
+    if (!spokenText) return undefined;
+    say(spokenText, locale);
+    return () => stop();
+  }, [spokenText, locale, say, stop]);
 
   /**
    * Hotspot click on the 3D computer.
@@ -124,6 +155,12 @@ export function AmlSimulationView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node, scenario, locale]);
 
+  // Single natural framing — the trainee sees the room from the staff
+  // side of the desk. No face zoom on entry: the client is part of the
+  // scene, not the subject. (Earlier portrait framing felt artificial,
+  // like a magnifying glass to the avatar's head.)
+  const cameraView = 'overview';
+
   if (!scenario || !node) {
     return (
       <div style={{ padding: 32 }}>
@@ -149,10 +186,10 @@ export function AmlSimulationView() {
       <SceneCanvas
         activeHotspot={node?.kind === 'notification' ? 'computer' : null}
         onHotspotSelect={handleHotspotSelect}
-        speaker={null}
+        speaker={isSpeaking ? 'client' : null}
         screenContent={screenContent}
         clientMood="neutral"
-        cameraView="overview"
+        cameraView={cameraView}
         hideHotspots={inspectorOpen}
       />
 
@@ -192,27 +229,6 @@ export function AmlSimulationView() {
         visible={inspectorOpen && node.kind === 'inspect'}
         onChoose={pickChoice}
       />
-
-      {/* Bottom-center mic */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 24,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 32,
-          background: 'white',
-          border: '3px solid var(--line)',
-          borderRadius: 999,
-          padding: '8px 18px',
-          boxShadow: 'var(--plush-sm)',
-        }}
-      >
-        <MicPulse
-          status={micActive ? 'listening' : 'idle'}
-          onClick={() => setMicActive(!micActive)}
-        />
-      </div>
     </motion.div>
   );
 }
