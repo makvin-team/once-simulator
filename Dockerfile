@@ -18,7 +18,7 @@ RUN npm ci --no-audit --no-fund
 # HTTP referrer in Google Cloud, or move the call behind a serverless
 # proxy. ARG scope is this stage only — the value does NOT appear in
 # the final nginx image's `docker history`.
-ARG VITE_GEMINI_API_KEY="AIzaSyC2boLhLMpTYeSuyFWxLwCdgj_8HqHxDbM"
+ARG VITE_GEMINI_API_KEY=""
 ENV VITE_GEMINI_API_KEY=$VITE_GEMINI_API_KEY
 
 # Copy the rest of the source and build

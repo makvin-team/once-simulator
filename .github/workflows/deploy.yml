@@ -60,6 +60,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha,scope=once-simulator
           cache-to: type=gha,mode=max,scope=once-simulator
+          build-args: |
+            VITE_GEMINI_API_KEY=${{ secrets.VITE_GEMINI_API_KEY }}
 
       - id: image
         run: echo "image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
